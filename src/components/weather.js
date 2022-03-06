@@ -49,10 +49,10 @@ const Weather = () => {
                 </div>
                 <div className="weather-info">
                     <WeatherInfo header="FEELS LIKE" unit="deg" data={mainData.main && mainData.main.feels_like ? (mainData.main.feels_like - 273.15).toFixed(1) : "-"}/>
-                    <WeatherInfo header="FEELS LIKE" unit="deg" data={mainData.main && mainData.main.temp_min ? (mainData.main.temp_min - 273.15).toFixed(1) : "-"}/>
-                    <WeatherInfo header="FEELS LIKE" unit="deg" data={mainData.main && mainData.main.temp_max ? (mainData.main.temp_max - 273.15).toFixed(1) : "-"}/>
-                    <WeatherInfo header="FEELS LIKE" unit="hPa" data={mainData.main && mainData.main.pressure ? mainData.main.pressure : "-"}/>
-                    <WeatherInfo header="FEELS LIKE" unit="%" data={mainData.main && mainData.main.humidity ? mainData.main.humidity : "-"}/>
+                    <WeatherInfo header="TEMP MIN" unit="deg" data={mainData.main && mainData.main.temp_min ? (mainData.main.temp_min - 273.15).toFixed(1) : "-"}/>
+                    <WeatherInfo header="TEMP MAX" unit="deg" data={mainData.main && mainData.main.temp_max ? (mainData.main.temp_max - 273.15).toFixed(1) : "-"}/>
+                    <WeatherInfo header="PRESSURE" unit="hPa" data={mainData.main && mainData.main.pressure ? mainData.main.pressure : "-"}/>
+                    <WeatherInfo header="HUMIDITY" unit="%" data={mainData.main && mainData.main.humidity ? mainData.main.humidity : "-"}/>
                 </div>
             </div>
             <div className="other-details-cont">

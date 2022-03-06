@@ -137,7 +137,6 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 60%;
   animation: weatherAnim 1s ease-in;
 }
 
