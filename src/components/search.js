@@ -32,25 +32,26 @@ function suggestNames(e, dispatch) {
 
 async function suggestionSelected(value, dispatch, btnClicked) {
     try {
+        //Removes special characters from the names eg: "Harran al ‘Awamid" here ' (single quote) will be removed
+        var formattedValue = value.replace(/[^a-zA-Z0-9 ]/g, "");
         dispatch(setSuggestion([]));
-        dispatch(setText(value));
+        dispatch(setText(formattedValue));
         dispatch(setProgress(10));
-        var res = await fetch('http://api.openweathermap.org/data/2.5/weather?q=' + value + '&appid=78d818a07aa06aad2c5ca7f24be31e9f');
+        var res = await fetch('http://api.openweathermap.org/data/2.5/weather?q=' + formattedValue + '&appid=78d818a07aa06aad2c5ca7f24be31e9f');
         if (res.status === 404) {
             throw res.status;
         }
         if (btnClicked) {
-            console.log("in");
-            const val = value.toLowerCase();
+            const val = formattedValue.toLowerCase();
             var exists = false;
             for (var i = 0; i < cities.length; i++) {
-                if (cities[i].toLowerCase() === val) {
+                if (cities[i].replace(/[^a-zA-Z0-9 ]/g, "").toLowerCase() === val) {
                     exists = true;
                     break;
                 }
             }
             if (!exists) {
-                alert(`The data for ${value} will be displayed but, "${value}" is not a city in "${country}", Please consider swithching the country`);
+                alert(`The data for ${formattedValue} will be displayed but, "${formattedValue}" is not a city in "${country}", Please consider swithching the country`);
             }
         }
         dispatch(setProgress(65));
@@ -60,7 +61,7 @@ async function suggestionSelected(value, dispatch, btnClicked) {
         dispatch(setProgress(100));
     } catch (error) {
         if (error === 404) {
-            alert(`"${value}" is NOT a CITY`);
+            alert(`"${formattedValue}" is NOT a CITY`);
             dispatch(setText(''));
             dispatch(setData({}));
             dispatch(setProgress(100));
@@ -72,13 +73,11 @@ async function suggestionSelected(value, dispatch, btnClicked) {
     }
 }
 
-function useRenderSuggestions() {
-    const suggestions = useSelector(state => state.suggestion);
-    const dispatch = useDispatch();
+function renderSuggestions(dispatch, suggestions) {
     return (
         <ul className="searchDiv-ul">
             {suggestions.map((elem, index) =>
-                <li key={index} className="searchDiv-li" 
+                <li key={index} className="searchDiv-li"
                     onClick={() => { suggestionSelected(elem, dispatch) }}>{elem}</li>)}
         </ul>
     );
@@ -114,6 +113,7 @@ async function getCities(code, dispatch) {
 function useRenderSearch() {
     const countryName = useSelector(state => state.country);
     const text = useSelector(state => state.text);
+    const suggestions = useSelector(state => state.suggestion);
     const dispatch = useDispatch();
     if (countryName === '') {
         var countries = [];
@@ -122,7 +122,7 @@ function useRenderSearch() {
         }
         return (
             <div>
-                <select id="ab" className="selectStyle" name="countries" size={1} onChange={(e)=>{country = e.target.value; getCities(countryCodes[e.target.value], dispatch) }} >
+                <select id="ab" className="selectStyle" name="countries" size={1} onChange={(e) => { country = e.target.value; getCities(countryCodes[e.target.value], dispatch) }} >
                     <option value={""}>Select Your Country</option>
                     {
                         countries.map((elem, index) =>
@@ -135,7 +135,10 @@ function useRenderSearch() {
         return (
             <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
                 <button className="searchDiv-button btnLeft" onClick={() => { dispatch(setData({})); dispatch(setText('')); dispatch(setCountry('')); }}>Change Country</button>
-                <input className="searchDiv-Input" id="searchBox" type="text" placeholder="Search For Your City" value={text} onChange={(event) => { suggestNames(event, dispatch, false) }}></input>
+                <div style={{ width: "30.9vmax" }}>
+                    <input className="searchDiv-Input" id="searchBox" type="text" placeholder="Search For Your City" value={text} onChange={(event) => { suggestNames(event, dispatch, false) }}></input>
+                    {renderSuggestions(dispatch, suggestions)}
+                </div>
                 <button className="searchDiv-button btnRight" onClick={(event) => {
                     const result = document.getElementById("searchBox").value;
                     suggestionSelected(result, dispatch, true);
@@ -150,7 +153,6 @@ const Search = () => {
     return (
         <div className="searchDiv">
             {useRenderSearch()}
-            {useRenderSuggestions()}
         </div>
     );
 };

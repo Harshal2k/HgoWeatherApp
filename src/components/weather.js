@@ -38,7 +38,7 @@ const Weather = () => {
     return (
         <div className="weather-details-cont">
             <div className="weather-div">
-                <div style={{ display: "flex", justifyContent: "space-between", width: "inherit", marginBottom:"1vmax" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", width: "100%", marginBottom:"1vmax" }}>
                     <h3 style={{ fontSize: "1vmax" }} className="weather-info-p">Country: {country ? countryNames[country] : "-"}</h3>
                     <h3 style={{ fontSize: "1vmax" }} className="weather-info-p">City: {city ? city : "-"}</h3>
                 </div>

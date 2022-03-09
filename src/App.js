@@ -1,9 +1,12 @@
 import React from "react";
 import Search from "./components/search";
+import lottie from 'lottie-web';
 import { useSelector, useDispatch } from 'react-redux'
 import Weather from "./components/weather";
 import { setProgress } from '../src/actions'
 import './App.css';
+import sun from "../src/static/sun.json"
+import earth from '../src/static/earth.json'
 
 import LoadingBar from 'react-top-loading-bar'
 
@@ -11,8 +14,12 @@ import LoadingBar from 'react-top-loading-bar'
 function App() {
   const progress = useSelector(state => state.progress);
   const dispatch = useDispatch();
-
-
+  React.useEffect(() => {
+    lottie.loadAnimation({
+      container: document.querySelector("#earthAnim"),
+      animationData: earth,
+    });
+  }, []);
   return (
     <div className="App">
       <LoadingBar
@@ -24,7 +31,7 @@ function App() {
         <Search />
         <Weather />
       </div>
-
+      <div id="earthAnim" className="lottieAnim"/>
     </div>
   );
 }

@@ -2,8 +2,7 @@
 
 .App {
   text-align: center;
-  min-height: 100vh;
-  background-color: #e6e7ee;
+  height: fit-content;
 }
 
 .AppDiv {
@@ -104,8 +103,7 @@
   text-align: left;
   list-style-type: none;
   background-color: white;
-  width: 30.9vmax;
-  margin-left: 36.7vmax;
+  width: inherit;
   border-radius: 0 0 0.7vmax 0.7vmax;
 }
 
@@ -226,6 +224,24 @@
   margin-right: 1vmax;
 }
 
+#sunAnim{
+  position: absolute;
+height: 29vw;
+width: fit-content;
+top: 0;
+z-index: -1;
+left: -3%;
+}
+
+#earthAnim{
+  opacity: 0.2;
+  position: absolute;
+  top: 50%;
+  z-index: -1;
+  margin-left: 50%;
+  transform: translate(-50%,-50%) scale(2.4);
+  height: 32vmax;
+}
 
 /*-------------------ANIMATIONS----------------------------------*/
 @keyframes selectAnim {
