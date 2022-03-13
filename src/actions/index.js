@@ -5,10 +5,10 @@ export const setCountry = (country)=>{
     };
 };
 
-export const setText = (text)=>{
+export const setCity = (city)=>{
     return{
-        type:'SET_TEXT',
-        payload:text,
+        type:'SET_CITY',
+        payload:city,
     };
 };
 
@@ -32,4 +32,18 @@ export const setProgress = (progress)=>{
         payload:progress,
     };
 };
+
+export const setCoordinates=(coordinates)=>{
+    return{
+        type:'SET_COORDINATES',
+        payload:coordinates,
+    }
+};
+
+export const setPollutionData = (pollutionData)=>{
+    return{
+        type:'SET_POLLUTIONDATA',
+        payload:pollutionData
+    }
+}
 
