@@ -77,6 +77,17 @@
   height: 2rem;
 }
 
+.searchDiv-button:active{
+  transform: translate(-0.1rem,0.1rem);
+  box-shadow: 0.2vmax 0.2vmax 0.4vmax #b8b9be, -0.2vmax -0.2vmax 0.4vmax #fff;
+}
+
+.searchDiv-button:disabled{
+  opacity: 0.6;
+  transform: translate(-0.1rem,0.1rem);
+  box-shadow: 0.2vmax 0.2vmax 0.4vmax #b8b9be, -0.2vmax -0.2vmax 0.4vmax #fff;
+}
+
 .btnLeft {
   border-radius: 5vmax 0 0 5vmax;
   background-color: #fb8282;

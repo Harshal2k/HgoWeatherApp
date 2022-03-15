@@ -5,6 +5,7 @@ import progressReducer from './progress';
 import dataReducer from './data';
 import coordinatesReducer from './coordinates';
 import pollutionDataReducer from './pollutionData';
+import pollutantsReducer from './pollutants';
 import {combineReducers} from 'redux';
 
 const allReducers = combineReducers({
@@ -15,6 +16,7 @@ const allReducers = combineReducers({
     data:dataReducer,
     coordinates:coordinatesReducer,
     pollutionData:pollutionDataReducer,
+    pollutants:pollutantsReducer,
 });
 
 export default allReducers;

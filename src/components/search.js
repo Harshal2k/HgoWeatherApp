@@ -1,7 +1,7 @@
 import React from "react";
 import firebaseConfig from "../Firebase";
 import { useSelector, useDispatch } from 'react-redux';
-import { setCountry, setSuggestion, setCity, setData, setProgress, setCoordinates } from '../actions'
+import { setCountry, setSuggestion, setCity, setData, setProgress, setCoordinates, setPollutionData,setPollutants } from '../actions'
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import {
     initializeApp
@@ -37,6 +37,8 @@ async function suggestionSelected(value, dispatch, btnClicked) {
         var formattedValue = value.replace(/[^a-zA-Z0-9- ]/g, "");
         dispatch(setSuggestion([]));
         dispatch(setCity(formattedValue));
+        dispatch(setPollutionData({}));
+        dispatch(setPollutants({index:0,component:{},aqi:1}));
         if(value in fullCitiesData){
             dispatch(setCoordinates(fullCitiesData[value].co));
         }
@@ -67,16 +69,20 @@ async function suggestionSelected(value, dispatch, btnClicked) {
     } catch (error) {
         if (error === 404) {
             alert(`"${formattedValue}" is NOT a CITY`);
-            dispatch(setCity(''));
-            dispatch(setCoordinates({lat:0,lon:0}));
-            dispatch(setData({}));
-            dispatch(setProgress(100));
         } else {
             alert("Something went wrong :(");
-            dispatch(setProgress(100));
         }
-
+        resetStates(dispatch);
+        dispatch(setProgress(100));
     }
+}
+
+function resetStates(dispatch){
+    dispatch(setCity(''));
+    dispatch(setPollutionData({}));
+    dispatch(setPollutants({index:0,component:{},aqi:1}));
+    dispatch(setCoordinates({lat:"-",lon:"-"}));
+    dispatch(setData({}));
 }
 
 function renderSuggestions(dispatch, suggestions) {
@@ -151,7 +157,7 @@ function useRenderSearch() {
         return (
             <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", flexDirection: "column" }}>
                 <div style={{ marginBottom: "1rem" }}>
-                    <button className="searchDiv-button btnLeft" onClick={() => { dispatch(setData({})); dispatch(setCity('')); dispatch(setCoordinates({lat:0,lon:0})); dispatch(setCountry('')); }}>Change Country</button>
+                    <button className="searchDiv-button btnLeft" onClick={() => { resetStates(dispatch); dispatch(setCountry(''));}}>Change Country</button>
                     <button className="searchDiv-button btnRight" onClick={(event) => {
                         const result = document.getElementById("searchBox").value;
                         suggestionSelected(result, dispatch, true);

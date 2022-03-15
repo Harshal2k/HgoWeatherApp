@@ -1,4 +1,4 @@
-const coordinatesReducer =(state={lat:0,lon:0},{type,payload})=>{
+const coordinatesReducer =(state={lat:"-",lon:"-"},{type,payload})=>{
     switch(type){
         case 'SET_COORDINATES':
             return payload;

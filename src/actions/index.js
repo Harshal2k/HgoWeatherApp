@@ -47,3 +47,10 @@ export const setPollutionData = (pollutionData)=>{
     }
 }
 
+export const setPollutants = (pollutants)=>{
+    return{
+        type:'SET_POLLUTANTS',
+        payload:pollutants
+    }
+}
+
