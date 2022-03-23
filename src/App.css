@@ -30,6 +30,46 @@
   margin-top: 2vmax;
 }
 
+.cartoonButtons{
+  position: relative;
+  padding-left: 0.7rem;
+  padding-right: 0.7rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  border-radius: 0.7rem;
+  font-size: 1.5rem;
+  font-family: 'Cabin', cursive;
+  border: none;
+  color: white;
+  box-shadow: 0px 0.5rem #111;
+  margin-top: 1rem;
+  border: 0.18rem solid #111;
+  transition: all 250ms;
+}
+
+.cartoonButtons:active{
+  box-shadow: 0px 0.18rem #111;
+  transform: translate(0,10%);
+}
+
+
+.CB-close{
+  background-color: rgb(240, 60, 60);
+}
+
+.CB-close:hover{
+  background-color: rgb(196, 37, 37);
+}
+
+.CB-getPolluData{
+  margin-left: 1rem;
+  background-color: rgb(25, 247, 91);
+}
+
+.CB-getPolluData:hover{
+  background-color: rgb(16, 199, 71);
+}
+
 .selectStyle {
   font-size: 1rem;
   color: #31344b;
@@ -70,11 +110,10 @@
   font-weight: 400;
   width: -moz-fit-content;
   width: fit-content;
-  padding: 0.7vmax;
+  padding: 0.5vmax;
   border: 0.1vmax solid #d1d9e6;
   box-shadow: 0.3vmax 0.3vmax 0.6vmax #b8b9be, -0.3vmax -0.3vmax 0.6vmax #fff;
   background-color: #e6e7ee;
-  height: 2rem;
 }
 
 .searchDiv-button:active{
