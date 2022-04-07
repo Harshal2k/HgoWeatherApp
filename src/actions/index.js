@@ -54,3 +54,10 @@ export const setPollutants = (pollutants)=>{
     }
 }
 
+export const setBulkWeatherData=(bulkWeatherData)=>{
+    return{
+        type:'SET_BULK_WEATHER_DATA',
+        payload:bulkWeatherData
+    }
+}
+

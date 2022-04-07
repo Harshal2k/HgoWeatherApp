@@ -1,13 +1,3 @@
-import {
-  initializeApp
-} from "firebase/app";
-import {
-  getFirestore,
-  collection,
-  doc,
-  getDoc
-} from 'firebase/firestore';
-
 const firebaseConfig = {
   apiKey: "AIzaSyA3cieZtbsasWDF-yy_w5uSeJz28voRqWg",
   authDomain: "hgo-weather-app.firebaseapp.com",

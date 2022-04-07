@@ -5,7 +5,7 @@ const WeatherInfo = ({ header, data, unit }) => {
         <div className="weather-info-div">
             <p className="info-p">{header}</p>
             <h1 className="info-h1">{data}</h1>
-            {unit == "deg" ?
+            {unit === "deg" ?
                 <p className="info-p">&#8451;</p> :
                 <p className="info-p">{unit}</p>
             }

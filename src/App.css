@@ -194,10 +194,11 @@
   align-items: center;
   flex-direction: column;
   animation: weatherAnim 1s ease-in;
-  max-width: 100%;
+  max-width: 70%;
   margin-left: 1rem;
   margin-right: 1rem;
 }
+
 
 .weather-temp {
   border-radius: 50%;
@@ -409,3 +410,11 @@ rgba(240,217,218,255)
 background: #00C9FF;  /* fallback for old browsers */
 /*background: -webkit-linear-gradient(to right, #92FE9D, #00C9FF);  /* Chrome 10-25, Safari 5.1-6 */
 /*background: linear-gradient(to right, #92FE9D, #00C9FF); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+/*--------------------MEDIA QUERIES-------------------*/
+
+@media screen and (max-width:600px) {
+  .weather-div{
+    max-width: 100%;
+  }
+}

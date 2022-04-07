@@ -6,6 +6,7 @@ import dataReducer from './data';
 import coordinatesReducer from './coordinates';
 import pollutionDataReducer from './pollutionData';
 import pollutantsReducer from './pollutants';
+import bulkWeatherData from './bulkWeatherData';
 import {combineReducers} from 'redux';
 
 const allReducers = combineReducers({
@@ -17,6 +18,7 @@ const allReducers = combineReducers({
     coordinates:coordinatesReducer,
     pollutionData:pollutionDataReducer,
     pollutants:pollutantsReducer,
+    bulkWeather:bulkWeatherData,
 });
 
 export default allReducers;
