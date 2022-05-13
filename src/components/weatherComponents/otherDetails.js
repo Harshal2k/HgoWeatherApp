@@ -4,7 +4,7 @@ import React from "react";
 //var elements = [{ name: speed, data: 1000, unit: "" }]
 const OtherDetails = ({header,elements}) => {
     const windStyle = {
-        color: "#444",
+        color: "var(--text-primary)",
         fontSize: "1.8vmax",
         fontFamily: "Cabin",
         letterSpacing: "0.5vmax",

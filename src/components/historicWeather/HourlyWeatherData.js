@@ -1,28 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { setProgress, setBulkWeatherData } from "../../actions";
 import WeatherInfo from "../weatherComponents/weatherInfo";
 
 import moment from "moment";
+import LoadingBar from "react-top-loading-bar";
+import icons from "../../Asset/SVG/svgIcons";
 
 var gettingHourlyData = false;
 var date = "-";
+var progs = 0;
 async function getDataFromCoord(dispatch, coordinates, setDisplayData) {
     try {
         gettingHourlyData = true
-        //dispatch(setProgress(10));
+        progs = 10;
         console.log("gettingHourlyData");
-        var res = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude=minutely,daily&appid=78d818a07aa06aad2c5ca7f24be31e9f`);
-        //var res = await fetch("https://api.github.com/users/harshal");
-        //dispatch(setProgress(65));
+        var res = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude=minutely&appid=78d818a07aa06aad2c5ca7f24be31e9f`);
+        progs = 65
         const data = await res.json()
-        console.log(data);
-        //dispatch(setProgress(80));
+        progs = 80;
         dispatch(setBulkWeatherData(data));
+        progs = 100;
         setDisplayData({ index: 0, length: 0, data: { empty: true } });
-        //dispatch(setProgress(100));
     } catch (error) {
-        dispatch(setProgress(100));
+        progs = 100;
         alert(`Something Went Wrong :(\n${error}`);
     } finally {
         gettingHourlyData = false;
@@ -46,15 +47,15 @@ function change(data, index, setDisplayData, isUp) {
 
 function renderRainAndSnow(data) {
     var toRender = []
-    if(data.rain && ("1h" in data.rain)){
+    if (data.rain && ("1h" in data.rain)) {
         toRender.push({ title: "Rain Volume (1Hr)", value: data.rain["1h"] })
     }
-    if(data.snow && ("1h" in data.snow)){
+    if (data.snow && ("1h" in data.snow)) {
         toRender.push({ title: "Snow Volume (1Hr)", value: data.snow["1h"] })
     }
     return (
         <>
-            {toRender.map(elem => 
+            {toRender.map(elem =>
                 <WeatherInfo header={elem.title} unit="mm" data={elem.value} />
             )}
         </>
@@ -66,6 +67,8 @@ const HourlyWeatherData = () => {
     const dispatch = useDispatch();
     const hWeatherData = useSelector(state => state.bulkWeather);
     const [displayData, setDisplayData] = useState({ index: 0, length: 0, data: { empty: true } });
+    const [progress, setProgress] = useState(0);
+    useEffect(() => { setProgress(progs) }, [progs]);
     const country = useSelector(state => state.country);
     let city = useSelector(state => state.city);
     let cityOrLocality = "City:"
@@ -92,12 +95,16 @@ const HourlyWeatherData = () => {
 
     return (
         <div className="weather-details-cont">
+            <LoadingBar
+                color='#f11946'
+                progress={progress}
+                onLoaderFinished={() => setProgress(0)} />
             <div style={{ marginTop: "2rem" }} className="pollutionContainer neumorphismEffect">
                 <p className="info-p">Hourly data is displayed for the below date time</p>
                 <div style={{ marginTop: "1rem", flexDirection: "row" }} className="pollutionContainer">
-                    <button disabled={displayData.length === 0 || displayData.index === 0 ? true : false} id="down" onClick={() => change(hWeatherData.hourly, displayData.index, setDisplayData, false)} style={{ height: "4rem", width: "3rem", marginRight: "0.7rem" }} className="searchDiv-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="#e64925" d="M169.4 278.6C175.6 284.9 183.8 288 192 288s16.38-3.125 22.62-9.375l160-160c12.5-12.5 12.5-32.75 0-45.25s-32.75-12.5-45.25 0L192 210.8L54.63 73.38c-12.5-12.5-32.75-12.5-45.25 0s-12.5 32.75 0 45.25L169.4 278.6zM329.4 265.4L192 402.8L54.63 265.4c-12.5-12.5-32.75-12.5-45.25 0s-12.5 32.75 0 45.25l160 160C175.6 476.9 183.8 480 192 480s16.38-3.125 22.62-9.375l160-160c12.5-12.5 12.5-32.75 0-45.25S341.9 252.9 329.4 265.4z" /></svg></button>
+                    <button disabled={displayData.length === 0 || displayData.index === 0 ? true : false} id="down" onClick={() => change(hWeatherData.hourly, displayData.index, setDisplayData, false)} style={{ height: "4rem", width: "3rem", marginRight: "0.7rem" }} className="searchDiv-button">{icons.downArrow}</button>
                     <h1 id="dateText" style={{ width: "16rem" }} className="info-h1">{date}</h1>
-                    <button disabled={displayData.length === 0 || displayData.index >= displayData.length - 1 ? true : false} id="up" onClick={() => change(hWeatherData.hourly, displayData.index, setDisplayData, true)} style={{ height: "4rem", width: "3rem", marginLeft: "0.7rem" }} className="searchDiv-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="#0eb00e" d="M54.63 246.6L192 109.3l137.4 137.4C335.6 252.9 343.8 256 352 256s16.38-3.125 22.62-9.375c12.5-12.5 12.5-32.75 0-45.25l-160-160c-12.5-12.5-32.75-12.5-45.25 0l-160 160c-12.5 12.5-12.5 32.75 0 45.25S42.13 259.1 54.63 246.6zM214.6 233.4c-12.5-12.5-32.75-12.5-45.25 0l-160 160c-12.5 12.5-12.5 32.75 0 45.25s32.75 12.5 45.25 0L192 301.3l137.4 137.4C335.6 444.9 343.8 448 352 448s16.38-3.125 22.62-9.375c12.5-12.5 12.5-32.75 0-45.25L214.6 233.4z" /></svg></button>
+                    <button disabled={displayData.length === 0 || displayData.index >= displayData.length - 1 ? true : false} id="up" onClick={() => change(hWeatherData.hourly, displayData.index, setDisplayData, true)} style={{ height: "4rem", width: "3rem", marginLeft: "0.7rem" }} className="searchDiv-button">{icons.upArrow}</button>
                 </div>
             </div>
 

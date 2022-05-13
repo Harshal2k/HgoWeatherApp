@@ -9,6 +9,8 @@ import { setProgress, setCoordinates, setCity, setCountry, setPollutants, setPol
 import './App.css';
 import { Map, Marker, ZoomControl } from 'pigeon-maps';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import useLocalStorage from 'use-local-storage';
+import icons from "./Asset/SVG/svgIcons";
 
 import LoadingBar from 'react-top-loading-bar'
 
@@ -17,6 +19,13 @@ var gettingAddress = false;
 function hideMap() {
   document.querySelector("#mapCont").style.display = "none";
   document.querySelector("body").style.overflow = "visible";
+}
+
+function activate(svgId) {
+  for (let i = 1; i < 5; i++) {
+    document.querySelector(`#svg${i}`).classList.remove("nav-icon-active");
+  }
+  document.querySelector(`#${svgId}`).classList.add("nav-icon-active");
 }
 
 async function getAddressData(coord, dispatch, setProgress) {
@@ -51,6 +60,8 @@ async function getAddressData(coord, dispatch, setProgress) {
 }
 
 function App() {
+  const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const [theme, setTheme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
   const [progress, setProgress] = useState(0);
   const dispatch = useDispatch();
   const coordinates = useSelector(state => state.coordinates);
@@ -61,16 +72,56 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
+      <div className="App" data-theme={theme}>
         <LoadingBar
           color='#f11946'
           progress={progress}
           onLoaderFinished={() => setProgress(0)} />
+        <div className="bg"></div>
         <div>
-          <Link to="/">Home</Link>
-          <Link to="/pollution">Pollution</Link>
-          <Link to="/hourlyWeatherData">Hourly Weather Data</Link>
-          <Link to="/dailyWeatherData">Daily Weather Data</Link>
+          <nav className="navbar">
+            <ul className="navbar-nav">
+              <li class="logo">
+                <a href="#" class="nav-link">
+                  <span class="link-text logo-text">HG Originals</span>
+                  {icons.hgo}
+                </a>
+              </li>
+              <li className="nav-item" onClick={() => { activate("svg1") }}>
+                <Link className="nav-link" to="/">
+                  {icons.home}
+                  <span className="link-text">Home</span>
+                </Link>
+              </li>
+
+              <li className="nav-item" onClick={() => { activate("svg2") }}>
+                <Link className="nav-link" to="/pollution">
+                  {icons.pollution}
+                  <span className="link-text">Pollution</span>
+                </Link>
+              </li>
+
+              <li className="nav-item" onClick={() => { activate("svg3") }}>
+                <Link className="nav-link" to="/hourlyWeatherData">
+                  {icons.hourlyWeather}
+                  <span className="link-text">Hourly Weather Data</span>
+                </Link>
+              </li>
+
+              <li className="nav-item" onClick={() => { activate("svg4") }}>
+                <Link className="nav-link" to="/dailyWeatherData">
+                  {icons.dailyWeather}
+                  <span className="link-text">Daily Weather Data</span>
+                </Link>
+              </li>
+              <li className="nav-item" onClick={() => { console.log("innnnnnn"); const newTheme = theme === 'light' ? 'dark' : 'light'; setTheme(newTheme); }}>
+                <div className="nav-link">
+                  {icons.darkMode}
+                  <span className="link-text">Theme</span>
+                </div>
+              </li>
+            </ul>
+          </nav>
         </div>
         <div className="AppDiv">
           <h1 className="App-h1">HGO Weather App</h1>

@@ -1,28 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { setProgress, setBulkWeatherData } from "../../actions";
 import WeatherInfo from "../weatherComponents/weatherInfo";
 
 import moment from "moment";
+import LoadingBar from "react-top-loading-bar";
 
 var gettingDailyData = false;
 var date = "-";
+var progs = 0;
 async function getDataFromCoord(dispatch, coordinates, setDisplayData) {
     try {
         gettingDailyData = true
-        //dispatch(setProgress(10));
+        progs = 10;
         console.log("gettingDailyData");
         var res = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude=minutely&appid=78d818a07aa06aad2c5ca7f24be31e9f`);
-        //var res = await fetch("https://api.github.com/users/harshal");
-        //dispatch(setProgress(65));
+        progs = 65
         const data = await res.json()
-        console.log(data);
-        //dispatch(setProgress(80));
+        progs = 80
         dispatch(setBulkWeatherData(data));
+        progs = 100;
         setDisplayData({ index: 0, length: 0, data: { empty: true } });
-        //dispatch(setProgress(100));
     } catch (error) {
-        dispatch(setProgress(100));
+        progs = 100;
         alert(`Something Went Wrong :(\n${error}`);
     } finally {
         gettingDailyData = false;
@@ -112,7 +112,7 @@ function sunMoonRiseSet(data) {
             <div className="pollutionContainer" style={{ flexDirection: "unset", marginTop: "0.7rem" }}>
                 {timings.map((elem) =>
                     <div className="neumorphismEffect" style={{ width: "9rem", margin: "0.5rem", height: "9rem" }}>
-                        <p className="info-p" style={{ height: "1.8rem" }}>{elem.title}</p>
+                        <p className="info-p" style={{ heightwhite: "1.8rem" }}>{elem.title}</p>
                         <h1 className="textWithBg" style={{ fontSize: "2rem", marginTop: "0.2rem" }}>{elem.time}</h1>
                         <p style={{ fontSize: "1rem" }} className="info-p">{elem.amPm}</p>
                     </div>
@@ -127,6 +127,8 @@ const DailyWeatherData = () => {
     const hWeatherData = useSelector(state => state.bulkWeather);
     const [displayData, setDisplayData] = useState({ index: 0, length: 0, data: { empty: true } });
     const country = useSelector(state => state.country);
+    const [progress, setProgress] = useState(0);
+    useEffect(() => { setProgress(progs) }, [progs]);
     let city = useSelector(state => state.city);
     let cityOrLocality = "City:"
     if (city.includes("--resetCity--")) {
@@ -134,8 +136,6 @@ const DailyWeatherData = () => {
         cityOrLocality = "Locality: "
     }
 
-    console.log(displayData)
-    console.log(displayData.index)
     const coordinates = useSelector(state => state.coordinates);
 
     if (!gettingDailyData && hWeatherData && Object.keys(hWeatherData).length <= 0) {
@@ -152,6 +152,10 @@ const DailyWeatherData = () => {
 
     return (
         <div className="weather-details-cont">
+            <LoadingBar
+                color='#f11946'
+                progress={progress}
+                onLoaderFinished={() => setProgress(0)} />
             <div style={{ marginTop: "2rem" }} className="pollutionContainer neumorphismEffect">
                 <p className="info-p">daily data is displayed for the below date time</p>
                 <div style={{ marginTop: "1rem", flexDirection: "row" }} className="pollutionContainer">
