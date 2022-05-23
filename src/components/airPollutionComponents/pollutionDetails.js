@@ -18,13 +18,11 @@ var emote = good;
 var isEmoteChanged = false;
 var date = "-";
 var pollutionListLength = 0;
-var progs = 0;
 
 const Pollution = () => {
     const dispatch = useDispatch();
     let coordinates = useSelector(state => state.coordinates);
     const [progress, setProgress] = useState(0);
-    useEffect(() => { setProgress(progs) }, [progs]);
     let city = useSelector(state => state.city);
     let country = useSelector(state => state.country);
     let cityOrLocality = "City:"
@@ -80,13 +78,13 @@ const Pollution = () => {
     }
     React.useEffect(() => {
         var animation = lottie.loadAnimation({
-            container: document.querySelector("#earthAnim"),
+            container: document.querySelector(".lottieAnim"),
             animationData: emote,
         });
         if (isEmoteChanged) {
             animation.destroy();
             animation = lottie.loadAnimation({
-                container: document.querySelector("#earthAnim"),
+                container: document.querySelector(".lottieAnim"),
                 animationData: emote,
             });
             isEmoteChanged = false;
@@ -107,7 +105,7 @@ const Pollution = () => {
                 <p className="info-p addrText"><span className="mkBold">Lon:</span> {coordinates.lon}</p>
             </div>
             <div className="airQualityDiv">
-                <div id="earthAnim" className="lottieAnim" />
+                <div className="lottieAnim"/>
                 <div className="airQualityContainer">
                     <p style={{ letterSpacing: "0.3rem" }} className="info-h1">AIR QUALITY</p>
                     <p style={{ margin: "0.6rem" }} className="info-p">Air Quality Index = {AQI}</p>
@@ -118,7 +116,7 @@ const Pollution = () => {
                 <p className="info-p">Pollution data is displayed for the below date time</p>
                 <div style={{ marginTop: "1rem", flexDirection: "row" }} className="pollutionContainer">
                     <button disabled={polluntantsLen === 0 || pollutantsIndex === 0 ? true : false} id="down" onClick={() => change(pollutionData, pollutantsIndex, dispatch, false)} style={{ height: "4rem", width: "3rem", marginRight: "0.7rem" }} className="searchDiv-button">{icons.downArrow}</button>
-                    <h1 id="dateText" style={{ width: "16rem" }} className="info-h1">{date}</h1>
+                    <h1 id="dateText" style={{ width: "13rem" }} className="info-h1">{date}</h1>
                     <button disabled={polluntantsLen === 0 || pollutantsIndex >= pollutionData.list.length - 1 ? true : false} id="up" onClick={() => change(pollutionData, pollutantsIndex, dispatch, true)} style={{ height: "4rem", width: "3rem", marginLeft: "0.7rem" }} className="searchDiv-button">{icons.upArrow}</button>
                 </div>
             </div>
@@ -130,20 +128,18 @@ const Pollution = () => {
 async function getPollutionData(coordinates, dispatch, setProgress) {
     try {
         if (!fetchStarted && coordinates.lat !== "-" && coordinates.lon !== "-") {
-            progs = 10;
+            setProgress(0);
             fetchStarted = true;
-            console.clear();
-            console.log("fetching pollution")
             var res = await fetch(`http://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=78d818a07aa06aad2c5ca7f24be31e9f`);
-            progs = 65;
+            setProgress(65);
             var data = await res.json();
             dispatch(setPollutionData(data));
-            progs = 80
+            setProgress(80);
             fetchStarted = false;
-            progs = 100
+            setProgress(100);
         }
     } catch (err) {
-        progs = 100;
+        setProgress(100);
         dispatch(setPollutionData({}));
         fetchStarted = false;
     }

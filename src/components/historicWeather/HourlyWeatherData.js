@@ -13,17 +13,17 @@ var progs = 0;
 async function getDataFromCoord(dispatch, coordinates, setDisplayData) {
     try {
         gettingHourlyData = true
-        progs = 10;
+        setProgress(0);
         console.log("gettingHourlyData");
         var res = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude=minutely&appid=78d818a07aa06aad2c5ca7f24be31e9f`);
-        progs = 65
+        setProgress(65);
         const data = await res.json()
-        progs = 80;
+        setProgress(80);
         dispatch(setBulkWeatherData(data));
-        progs = 100;
+        setProgress(100);
         setDisplayData({ index: 0, length: 0, data: { empty: true } });
     } catch (error) {
-        progs = 100;
+        setProgress(100);
         alert(`Something Went Wrong :(\n${error}`);
     } finally {
         gettingHourlyData = false;
@@ -68,7 +68,6 @@ const HourlyWeatherData = () => {
     const hWeatherData = useSelector(state => state.bulkWeather);
     const [displayData, setDisplayData] = useState({ index: 0, length: 0, data: { empty: true } });
     const [progress, setProgress] = useState(0);
-    useEffect(() => { setProgress(progs) }, [progs]);
     const country = useSelector(state => state.country);
     let city = useSelector(state => state.city);
     let cityOrLocality = "City:"
@@ -77,15 +76,13 @@ const HourlyWeatherData = () => {
         cityOrLocality = "Locality: "
     }
 
-    console.log(displayData)
-    console.log(displayData.index)
     const coordinates = useSelector(state => state.coordinates);
 
-    if (!gettingHourlyData && hWeatherData && Object.keys(hWeatherData).length <= 0) {
+    if (!gettingHourlyData && hWeatherData && Object.keys(hWeatherData).length <= 0 && coordinates.lat !== '-') {
         getDataFromCoord(dispatch, coordinates, setDisplayData);
     }
 
-    if (displayData.data.empty && hWeatherData.hourly && hWeatherData.hourly.length > 0 && coordinates.lat !== '-') {
+    if (!gettingHourlyData && displayData.data.empty && hWeatherData.hourly && hWeatherData.hourly.length > 0 && coordinates.lat !== '-') {
         setDisplayData({ index: 0, length: hWeatherData.hourly.length, data: hWeatherData.hourly[0] })
     }
 
@@ -103,7 +100,7 @@ const HourlyWeatherData = () => {
                 <p className="info-p">Hourly data is displayed for the below date time</p>
                 <div style={{ marginTop: "1rem", flexDirection: "row" }} className="pollutionContainer">
                     <button disabled={displayData.length === 0 || displayData.index === 0 ? true : false} id="down" onClick={() => change(hWeatherData.hourly, displayData.index, setDisplayData, false)} style={{ height: "4rem", width: "3rem", marginRight: "0.7rem" }} className="searchDiv-button">{icons.downArrow}</button>
-                    <h1 id="dateText" style={{ width: "16rem" }} className="info-h1">{date}</h1>
+                    <h1 id="dateText" style={{ width: "13rem" }} className="info-h1">{date}</h1>
                     <button disabled={displayData.length === 0 || displayData.index >= displayData.length - 1 ? true : false} id="up" onClick={() => change(hWeatherData.hourly, displayData.index, setDisplayData, true)} style={{ height: "4rem", width: "3rem", marginLeft: "0.7rem" }} className="searchDiv-button">{icons.upArrow}</button>
                 </div>
             </div>

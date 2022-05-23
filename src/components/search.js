@@ -133,7 +133,6 @@ async function getCities(code, dispatch, selectedCountryname, setProgress) {
     }
 }
 
-
 function useRenderSearch(setProgress) {
     const countryName = useSelector(state => state.country);
     let city = useSelector(state => state.city);
@@ -192,17 +191,25 @@ function displayMap() {
     document.querySelector("body").style.overflow = "hidden";
 }
 
-const Search = () => {
+const Search = ({ show = true }) => {
+    console.log(show);
     const [progress, setProgress] = useState(0);
+    let renderSearch = useRenderSearch(setProgress);
     return (
-        <div className="searchDiv">
-            <LoadingBar
-                color='#f11946'
-                progress={progress}
-                onLoaderFinished={() => setProgress(0)} />
-            {useRenderSearch(setProgress)}
-            <button id="mapBtn" style={{ marginTop: "1rem" }} className="searchDiv-button" onClick={() => { displayMap() }}>Use Map to locate</button>
-        </div>
+        <>
+            {show ? (
+                <div className="searchDiv">
+                    <LoadingBar
+                        color='#f11946'
+                        progress={progress}
+                        onLoaderFinished={() => setProgress(0)} />
+                    {renderSearch}
+                    <button id="mapBtn" style={{ marginTop: "1rem" }} className="searchDiv-button" onClick={() => { displayMap() }}>Use Map to locate</button>
+                </div>
+            )
+                : (<></>)}
+        </>
+
     );
 };
 

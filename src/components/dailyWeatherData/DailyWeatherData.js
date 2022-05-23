@@ -8,21 +8,20 @@ import LoadingBar from "react-top-loading-bar";
 
 var gettingDailyData = false;
 var date = "-";
-var progs = 0;
 async function getDataFromCoord(dispatch, coordinates, setDisplayData) {
     try {
+        console.log("innnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
         gettingDailyData = true
-        progs = 10;
-        console.log("gettingDailyData");
+        setProgress(10);
         var res = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude=minutely&appid=78d818a07aa06aad2c5ca7f24be31e9f`);
-        progs = 65
+        setProgress(65);
         const data = await res.json()
-        progs = 80
+        setProgress(80);
         dispatch(setBulkWeatherData(data));
-        progs = 100;
+        setProgress(100);
         setDisplayData({ index: 0, length: 0, data: { empty: true } });
     } catch (error) {
-        progs = 100;
+        setProgress(100);
         alert(`Something Went Wrong :(\n${error}`);
     } finally {
         gettingDailyData = false;
@@ -128,7 +127,6 @@ const DailyWeatherData = () => {
     const [displayData, setDisplayData] = useState({ index: 0, length: 0, data: { empty: true } });
     const country = useSelector(state => state.country);
     const [progress, setProgress] = useState(0);
-    useEffect(() => { setProgress(progs) }, [progs]);
     let city = useSelector(state => state.city);
     let cityOrLocality = "City:"
     if (city.includes("--resetCity--")) {
@@ -138,11 +136,12 @@ const DailyWeatherData = () => {
 
     const coordinates = useSelector(state => state.coordinates);
 
-    if (!gettingDailyData && hWeatherData && Object.keys(hWeatherData).length <= 0) {
+    if (!gettingDailyData && hWeatherData && Object.keys(hWeatherData).length <= 0 && coordinates.lat !== '-') {
+        console.log("1111111111111111111111111111");
         getDataFromCoord(dispatch, coordinates, setDisplayData);
     }
 
-    if (displayData.data.empty && hWeatherData.daily && hWeatherData.daily.length > 0 && coordinates.lat !== '-') {
+    if (!gettingDailyData && displayData.data.empty && hWeatherData.daily && hWeatherData.daily.length > 0 && coordinates.lat !== '-') {
         setDisplayData({ index: 0, length: hWeatherData.daily.length, data: hWeatherData.daily[0] })
     }
 
@@ -160,7 +159,7 @@ const DailyWeatherData = () => {
                 <p className="info-p">daily data is displayed for the below date time</p>
                 <div style={{ marginTop: "1rem", flexDirection: "row" }} className="pollutionContainer">
                     <button disabled={displayData.length === 0 || displayData.index === 0 ? true : false} id="down" onClick={() => change(hWeatherData.daily, displayData.index, setDisplayData, false)} style={{ height: "4rem", width: "3rem", marginRight: "0.7rem" }} className="searchDiv-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="#e64925" d="M169.4 278.6C175.6 284.9 183.8 288 192 288s16.38-3.125 22.62-9.375l160-160c12.5-12.5 12.5-32.75 0-45.25s-32.75-12.5-45.25 0L192 210.8L54.63 73.38c-12.5-12.5-32.75-12.5-45.25 0s-12.5 32.75 0 45.25L169.4 278.6zM329.4 265.4L192 402.8L54.63 265.4c-12.5-12.5-32.75-12.5-45.25 0s-12.5 32.75 0 45.25l160 160C175.6 476.9 183.8 480 192 480s16.38-3.125 22.62-9.375l160-160c12.5-12.5 12.5-32.75 0-45.25S341.9 252.9 329.4 265.4z" /></svg></button>
-                    <h1 id="dateText" style={{ width: "16rem" }} className="info-h1">{date}</h1>
+                    <h1 id="dateText" style={{ width: "13rem" }} className="info-h1">{date}</h1>
                     <button disabled={displayData.length === 0 || displayData.index >= displayData.length - 1 ? true : false} id="up" onClick={() => change(hWeatherData.daily, displayData.index, setDisplayData, true)} style={{ height: "4rem", width: "3rem", marginLeft: "0.7rem" }} className="searchDiv-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="#0eb00e" d="M54.63 246.6L192 109.3l137.4 137.4C335.6 252.9 343.8 256 352 256s16.38-3.125 22.62-9.375c12.5-12.5 12.5-32.75 0-45.25l-160-160c-12.5-12.5-32.75-12.5-45.25 0l-160 160c-12.5 12.5-12.5 32.75 0 45.25S42.13 259.1 54.63 246.6zM214.6 233.4c-12.5-12.5-32.75-12.5-45.25 0l-160 160c-12.5 12.5-12.5 32.75 0 45.25s32.75 12.5 45.25 0L192 301.3l137.4 137.4C335.6 444.9 343.8 448 352 448s16.38-3.125 22.62-9.375c12.5-12.5 12.5-32.75 0-45.25L214.6 233.4z" /></svg></button>
                 </div>
             </div>

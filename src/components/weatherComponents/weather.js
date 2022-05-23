@@ -10,7 +10,6 @@ var gettingData=false;
 
 async function getDataFromCoord(dispatch, coordinates,setProgress) {
     try {
-        console.log("getting data");
         gettingData=true;
         setProgress(10);
         var res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=78d818a07aa06aad2c5ca7f24be31e9f`);
@@ -43,7 +42,6 @@ const Weather = () => {
     var sunrise = "-";
     var sunset = "-";
     if (Object.keys(mainData).length <= 0 && coordinates.lat !== "-" && !gettingData) {
-        console.log("called");
         getDataFromCoord(dispatch, coordinates,setProgress);
     }
     if (mainData && mainData.sys && mainData.sys.sunrise) {

@@ -14,8 +14,8 @@ const OtherDetails = ({header,elements}) => {
         <div className="OD-div">
             <h1 style={windStyle}>{header}</h1>
             <div className="OD-info">
-                {elements.map((elem) =>
-                    <div className="ODI-div">
+                {elements.map((elem,index) =>
+                    <div key={index} className="ODI-div">
                         <p className="info-p">{elem.name}</p>
                         {elem.unit === "deg" ?
                             <h1 className="info-h1">{elem.data} &deg;</h1> :
