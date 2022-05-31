@@ -15,12 +15,13 @@ import icons from "./Asset/SVG/svgIcons";
 import LoadingBar from 'react-top-loading-bar'
 import News from "./components/newsComponents/news";
 import ContactInfo from "./components/contactComponents/ContactInfo";
+import About from "./components/aboutComponents/About";
 
 var gettingAddress = false;
 
 function hideMap() {
   document.querySelector("#mapCont").style.display = "none";
-  document.querySelector("body").style.overflow = "visible";
+  document.querySelector(".AppDiv").style.display = "flex";
 }
 
 function activate(svgId) {
@@ -31,7 +32,11 @@ function activate(svgId) {
 }
 
 async function getAddressData(coord, dispatch, setProgress) {
+  const close = document.querySelector(".CB-close");
+  const getPolluData = document.querySelector(".CB-getPolluData");
   try {
+    close.disabled = true;
+    getPolluData.disabled = true;
     gettingAddress = true;
     setProgress(20);
     const key = "473fd137f28cd8094a012d62483d9695";
@@ -58,6 +63,8 @@ async function getAddressData(coord, dispatch, setProgress) {
     alert(`Something Went Wrong :( \n${error}`)
   } finally {
     setProgress(100);
+    close.disabled = false;
+    getPolluData.disabled = false;
   }
 }
 
@@ -67,10 +74,10 @@ function App() {
   const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const [theme, setTheme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
   const [progress, setProgress] = useState(0);
-  const [navName, setNavName] = useState("Home");
+  const [navName, setNavName] = useState("🏠 Home");
   const dispatch = useDispatch();
   const coordinates = useSelector(state => state.coordinates);
-  var coord = [50.879, 4.6997];
+  var coord = [22.869775211665768, 78.48530131630628];
   if (coordinates.lat !== '-') {
     coord = [coordinates.lat, coordinates.lon];
   }
@@ -78,25 +85,25 @@ function App() {
   useEffect(() => {
     if (location.pathname === "/") {
       activate("svg1");
-      setNavName("Home");
+      setNavName("🏠 Home");
     } else if (location.pathname === '/pollution') {
       activate("svg2");
-      setNavName("Pollution");
+      setNavName("🏭 Pollution");
     } else if (location.pathname === '/hourlyWeatherData') {
       activate("svg3");
-      setNavName("Hourly Weather Data");
+      setNavName("⏳ Hourly Weather Data");
     } else if (location.pathname === '/dailyWeatherData') {
       activate("svg4");
-      setNavName("Daily Weather Data");
+      setNavName("📆 Daily Weather Data");
     } else if (location.pathname === '/news') {
       activate("svg5");
-      setNavName("News");
+      setNavName("📻 News");
     } else if (location.pathname === '/contact') {
       activate("svg6");
-      setNavName("Contact");
+      setNavName("☎️ Contact");
     } else if (location.pathname === '/about') {
       activate("svg7");
-      setNavName("About");
+      setNavName("📝 About");
     }
 
   }, []);
@@ -116,49 +123,49 @@ function App() {
                 {icons.hgo}
               </a>
             </li>
-            <li className="nav-item" onClick={() => { activate("svg1"); setNavName("Home"); }}>
+            <li className="nav-item" onClick={() => { activate("svg1"); setNavName("🏠 Home"); }}>
               <Link className="nav-link" to="/">
                 {icons.home}
                 <span className="link-text">Home</span>
               </Link>
             </li>
 
-            <li className="nav-item" onClick={() => { activate("svg2"); setNavName("Pollution"); }}>
+            <li className="nav-item" onClick={() => { activate("svg2"); setNavName("🏭 Pollution"); }}>
               <Link className="nav-link" to="/pollution">
                 {icons.pollution}
                 <span className="link-text">Pollution</span>
               </Link>
             </li>
 
-            <li className="nav-item" onClick={() => { activate("svg3"); setNavName("Hourly Weather Data"); }}>
+            <li className="nav-item" onClick={() => { activate("svg3"); setNavName("⏳ Hourly Weather Data"); }}>
               <Link className="nav-link" to="/hourlyWeatherData">
                 {icons.hourlyWeather}
                 <span style={{ marginLeft: "0.7rem" }} className="link-text">Hourly Weather Data</span>
               </Link>
             </li>
 
-            <li className="nav-item" onClick={() => { activate("svg4"); setNavName("Daily Weather Data"); }}>
+            <li className="nav-item" onClick={() => { activate("svg4"); setNavName("📆 Daily Weather Data"); }}>
               <Link className="nav-link" to="/dailyWeatherData">
                 {icons.dailyWeather}
                 <span style={{ marginLeft: "0.7rem" }} className="link-text">Daily Weather Data</span>
               </Link>
             </li>
 
-            <li className="nav-item" onClick={() => { activate("svg5"); setNavName("News"); }}>
+            <li className="nav-item" onClick={() => { activate("svg5"); setNavName("📻 News"); }}>
               <Link className="nav-link" to="/news">
                 {icons.news}
                 <span className="link-text">News</span>
               </Link>
             </li>
 
-            <li className="nav-item" onClick={() => { activate("svg6"); setNavName("Contact"); }}>
+            <li className="nav-item" onClick={() => { activate("svg6"); setNavName("☎️ Contact"); }}>
               <Link className="nav-link" to="/contact">
                 {icons.contact}
                 <span className="link-text">Contact</span>
               </Link>
             </li>
 
-            <li className="nav-item" onClick={() => { activate("svg7"); setNavName("About"); }}>
+            <li className="nav-item" onClick={() => { activate("svg7"); setNavName("📝 About"); }}>
               <Link className="nav-link" to="/about">
                 {icons.aboutUs}
                 <span className="link-text">About</span>
@@ -185,12 +192,13 @@ function App() {
           <Route path="/dailyWeatherData" element={<DailyWeatherData />}></Route>
           <Route path="/news" element={<News />}></Route>
           <Route path="/contact" element={<ContactInfo />}></Route>
+          <Route path="/about" element={<About />}></Route>
         </Routes>
       </div>
       <div id="mapCont" style={{ display: "none", position: "absolute", height: "100%", width: "100%", top: "0%", zIndex: "2" }}>
         <div style={{ height: "100%", position: "fixed", width: "100%", backgroundColor: "#020535", opacity: "0.85" }}>.</div>
-        <div style={{ marginTop: "50vh", width: "80%", transform: "translate(-50%,-50%)", marginLeft: "50%" }}>
-          <Map height={400} defaultCenter={coord} center={coord} defaultZoom={1} onClick={({ event, latLng, pixel }) => { dispatch(setCoordinates({ lat: latLng[0], lon: latLng[1] })) }}>
+        <div style={{ marginTop: "50vh", width: "90%", transform: "translate(-50%,-50%)", marginLeft: "50%" }}>
+          <Map height={600} defaultCenter={coord} center={coord} defaultZoom={3.8} onClick={({ event, latLng, pixel }) => { dispatch(setCoordinates({ lat: latLng[0], lon: latLng[1] })) }}>
             <ZoomControl />
             <Marker id="marker" width={50} anchor={coord} />
           </Map>

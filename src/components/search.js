@@ -188,7 +188,7 @@ function displayMap() {
     document.body.scrollTop = 0;// for safari
     document.documentElement.scrollTop = 0;// for rest of the browsers
     document.querySelector("#mapCont").style.display = "block";
-    document.querySelector("body").style.overflow = "hidden";
+    document.querySelector(".AppDiv").style.display = "none";
 }
 
 const Search = ({ show = true }) => {

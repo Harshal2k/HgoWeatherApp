@@ -46,10 +46,10 @@ function change(data, index, setDisplayData, isUp) {
 function renderRainAndSnow(data) {
     var toRender = []
     if (data.rain && ("1h" in data.rain)) {
-        toRender.push({ title: "Rain Volume (1Hr)", value: data.rain["1h"] })
+        toRender.push({ title: "RAIN VOLUME (1Hr)", value: data.rain["1h"] })
     }
     if (data.snow && ("1h" in data.snow)) {
-        toRender.push({ title: "Snow Volume (1Hr)", value: data.snow["1h"] })
+        toRender.push({ title: "SNOW VOLUME (1Hr)", value: data.snow["1h"] })
     }
     return (
         <>

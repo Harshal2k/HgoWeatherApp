@@ -46,10 +46,10 @@ function change(data, index, setDisplayData, isUp) {
 function renderRainAndSnow(data) {
     var toRender = []
     if (data.rain) {
-        toRender.push({ title: "Rain Volume", value: data.rain })
+        toRender.push({ title: "RAIN VOLUME", value: data.rain })
     }
     if (data.snow) {
-        toRender.push({ title: "Snow Volume", value: data.snow })
+        toRender.push({ title: "SNOW VOLUME", value: data.snow })
     }
     return (
         <>
@@ -84,24 +84,32 @@ function sunMoonRiseSet(data) {
 
     if (data.moon_phase) {
         let phaseName = ""
+        let emoji = "🌑";
         if (data.moon_phase === 0 || data.moon_phase === 1) {
             phaseName = "New Moon";
         } else if (data.moon_phase === 0.25) {
             phaseName = "First Quater Moon";
+            emoji = "🌓";
         } else if (data.moon_phase === 0.5) {
             phaseName = "Full Moon";
+            emoji = "🌕";
         } else if (data.moon_phase === 0.75) {
             phaseName = "Last Quater Moon";
+            emoji = "🌗";
         } else if (data.moon_phase > 0 && data.moon_phase < 0.25) {
             phaseName = "Waxing Crescent";
+            emoji = "🌒";
         } else if (data.moon_phase > 0.25 && data.moon_phase < 0.5) {
             phaseName = "Waxing Gibous";
+            emoji = "🌔";
         } else if (data.moon_phase > 0.5 && data.moon_phase < 0.75) {
             phaseName = "Waning Gibous";
+            emoji = "🌖";
         } else if (data.moon_phase > 0.75 && data.moon_phase < 1) {
             phaseName = "Waning Crescent";
+            emoji = "🌘";
         }
-        timings.push({ title: "Moon Phase", time: data.moon_phase, amPm: phaseName });
+        timings.push({ title: "Moon Phase", time: data.moon_phase, amPm: phaseName, emoji: emoji });
     }
 
 
@@ -113,6 +121,7 @@ function sunMoonRiseSet(data) {
                     <div className="neumorphismEffect" style={{ width: "9rem", margin: "0.5rem", height: "9rem" }}>
                         <p className="info-p" style={{ heightwhite: "1.8rem" }}>{elem.title}</p>
                         <h1 className="textWithBg" style={{ fontSize: "2rem", marginTop: "0.2rem" }}>{elem.time}</h1>
+                        <p>{elem.emoji}</p>
                         <p style={{ fontSize: "1rem" }} className="info-p">{elem.amPm}</p>
                     </div>
                 )}

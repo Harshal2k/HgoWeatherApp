@@ -51,8 +51,6 @@ const ContactInfo = () => {
 
     useEffect(() => {
         if (Object.keys(ratings).length > 0 && (showRatings || localStorage.getItem("Rated"))) {
-            console.log("----------------------------")
-            console.log(ratings);
             displayRatings();
         }
     }, [showRatings, ratings]);
@@ -128,7 +126,6 @@ const ContactInfo = () => {
             localStorage.setItem("Rated", 'true');
             localStorage.setItem("ratedFor", ratingName);
             localStorage.setItem(ratingName, ratings[ratingName]);
-            console.log(ratings);
             setRatingDetails(ratingName, ratings[ratingName], ratings.count);
             setRatings(ratings);
             setShowRatings(true);
@@ -147,7 +144,7 @@ const ContactInfo = () => {
             const rateText = document.querySelector(`#R${i}`);
             rateText.style.display = 'block';
             if (ratedFor == rNames[i]) {
-                rateText.style.color = 'lightgreen';
+                rateText.style.color = 'orangered';
             }
             if (ratings && "count" in ratings) {
                 let percent = ratings?.[rNames[i]] && ratings.count != 0 ? ((ratings[rNames[i]] / ratings.count) * 100).toFixed(1) + "%" : "0%";
@@ -269,9 +266,9 @@ const ContactInfo = () => {
 
             <div style={{ width: "72.5rem", maxWidth: "96%" }} className="OD-div">
                 <div id="sending" style={{ width: "40%", display: 'none' }} />
-                <h1 id="thanks" className="info-h1" style={{ fontSize: "4vmax", display: "none" }}>Thank's for your feedback<span className="feedbackTitle02">WE WILL GET BACK TO YOU SOON</span></h1>
+                <h1 id="thanks" className="info-h1" style={{ fontSize: "4vmax", display: "none" }}>Thank's for your feedback😃<span className="feedbackTitle02">WE WILL GET BACK TO YOU SOON</span></h1>
                 <div id="form" style={{ display: 'contents' }}>
-                    <h2 className="info-h1 contactFormTitle">Let's get in touch</h2>
+                    <h2 className="info-h1 contactFormTitle">Let's get in touch 🤝 </h2>
                     <label style={labelStyle} className="info-p">NAME *</label>
                     <input value={name} style={{ marginTop: "0.3rem", width: "25rem", maxWidth: "75%", textAlign: "initial" }} className="searchDiv-Input" placeholder="Name *" onChange={(e) => validateNSetName(e.target.value)} />
                     <p id="nameError" className="info-p" style={{ color: 'red', display: 'none', marginTop: "0.5rem" }}>{nameError}</p>
