@@ -51,6 +51,27 @@
   border-radius: 1rem;
 }
 
+.txtArea::-webkit-scrollbar {
+  background-color: transparent;
+  width: 1rem
+}
+
+.txtArea::-webkit-scrollbar-thumb {
+  border: 0.4rem solid rgba(0, 0, 0, 0);
+}
+
+* {
+  user-select: none;
+  /* supported by Chrome and Opera */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+}
+
 .bg {
   height: 100vh;
   position: absolute;
@@ -331,7 +352,7 @@
   background-color: var(--primary);
   width: 21rem;
   font-size: 1rem;
-  border-radius: 0.9vmax;
+  border-radius: 2rem;
   color: var(--text-primary);
   font-weight: 300;
   text-align: center;
@@ -605,6 +626,46 @@
   border: 1px solid var(--border); */
 }
 
+.contactTitle {
+  letter-spacing: 0.3rem;
+  font-weight: 100;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  background-color: var(--secondary);
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.contactFormTitle {
+  font-size: 3em;
+}
+
+.emote {
+  height: fit-content;
+  width: 100%;
+  padding: 0.5rem;
+  transition: all 600ms ease;
+}
+
+.rateEmote:hover {
+  filter: brightness(1.4);
+}
+
+.rateEmote:active {
+  width: 95%;
+}
+
+.emote-dark {
+  filter: brightness(0.13);
+}
+
+.feedbackTitle02 {
+  display: block;
+  font-size: 1.5vmax;
+  font-weight: 100;
+  letter-spacing: 0.5vmax;
+}
+
 /*-------------------ANIMATIONS----------------------------------*/
 @keyframes selectAnim {
   0% {
@@ -635,19 +696,9 @@
   }
 }
 
-/* #aee2f0
-rgba(174,226,240,255)
-
-#f0d9da
-rgba(240,217,218,255)
-
-background: #00C9FF;  /* fallback for old browsers */
-/*background: -webkit-linear-gradient(to right, #92FE9D, #00C9FF);  /* Chrome 10-25, Safari 5.1-6 */
-/*background: linear-gradient(to right, #92FE9D, #00C9FF); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
 /*--------------------MEDIA QUERIES-------------------*/
 
-/*-----------------SMALL SCREEN---------------------------*/
+/*-----SMALL SCREEN------*/
 @media screen and (max-width:600px) {
   .weather-div {
     max-width: 100%;
@@ -655,11 +706,20 @@ background: #00C9FF;  /* fallback for old browsers */
 }
 
 @media only screen and (max-width: 600px) {
+  *::-webkit-scrollbar {
+    display: none;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    display: none;
+  }
+
   .navbar {
     bottom: 0;
     width: 100vw;
     height: 5rem;
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
   }
 
   .logo {
@@ -701,6 +761,10 @@ background: #00C9FF;  /* fallback for old browsers */
 
   .nav-item:last-child {
     margin-top: initial;
+  }
+
+  .contactFormTitle {
+    font-size: 1.6em;
   }
 }
 

@@ -14,7 +14,6 @@ async function getDataFromCoord(dispatch, coordinates, setDisplayData) {
     try {
         gettingHourlyData = true
         setProgress(0);
-        console.log("gettingHourlyData");
         var res = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude=minutely&appid=78d818a07aa06aad2c5ca7f24be31e9f`);
         setProgress(65);
         const data = await res.json()
@@ -39,7 +38,6 @@ function change(data, index, setDisplayData, isUp) {
     console.log(index);
 
     if (data[index]) {
-        //dispatch(setPollutants({index:index,component:data.list[index].components,aqi:data.list[index].main.aqi}));
         setDisplayData({ index: index, length: data.length, data: data[index] })
         document.querySelector("#dateText").innerHTML = moment.unix(data[index].dt).format("lll");
     }
