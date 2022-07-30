@@ -70,13 +70,86 @@
   -moz-user-select: none;
   /* Firefox */
   -ms-user-select: none;
+  font-family: 'Cabin', sans-serif;
 }
+
+footer {
+  margin-left: 5rem;
+  padding: 4rem;
+  background-color: var(--secondary);
+  margin-top: 2rem;
+  transition: all 600ms ease;
+}
+
+#hgIcon {
+  width: 3rem;
+}
+
+footer #hgIcon {
+  width: 8rem;
+}
+
+.popUp {
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+  padding: 0.6rem;
+  border-radius: 0.8rem;
+  box-shadow: 5px 10px 14px 0px #28282830;
+  color: black;
+  display: inline-flex;
+  z-index: 2;
+  transform-origin: 90% 50%;
+}
+
+.popup-success {
+  background-color: #d2f5b1;
+  border: 2px solid #3eb105;
+}
+
+.popup-error {
+  background-color: #fdcbcb;
+  border: 2px solid red;
+}
+
+.popUp-btn {
+  position: absolute;
+  right: 0.8rem;
+  top: 0.1rem;
+  cursor: pointer;
+}
+
+.popUp-btn div {
+  height: 1.2rem;
+  width: 1.2rem;
+  background-color: white;
+  position: absolute;
+  top: 0.5rem;
+  right: -0.25rem;
+  z-index: -1;
+  border-radius: 100%;
+  transition: all 600ms ease;
+}
+
+.popUp-btn span {
+  font-size: 1.6rem;
+}
+
+.popUp-btn:hover div {
+  background-color: rgb(0, 0, 0);
+}
+
+.popUp-btn:hover span {
+  color: white;
+}
+
 
 .bg {
   height: 100vh;
   position: absolute;
   background-color: var(--primary);
   width: 100%;
+  z-index: -1;
   transition: all 600ms ease;
 }
 
@@ -399,7 +472,6 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  animation: weatherAnim 1s ease-in;
   max-width: 70%;
   margin-left: 1rem;
   margin-right: 1rem;
@@ -666,6 +738,7 @@
   font-size: 1.3rem;
 }
 
+
 /*-------------------ANIMATIONS----------------------------------*/
 @keyframes selectAnim {
   0% {
@@ -684,15 +757,32 @@
   }
 }
 
-@keyframes weatherAnim {
+@keyframes popupAnim {
   0% {
-    border: 0 solid var(--primary);
-    box-shadow: 0vmax 0vmax 0vmax var(--primary), 0vmax 0vmax 0vmax var(--primary);
+    transform: scale(0);
+    right: -20rem;
+    opacity: 0;
   }
 
   100% {
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
+    transform: scale(1);
+    right: 1rem;
+    opacity: 1;
+  }
+}
+
+@keyframes closeAnim {
+  0% {
+    transform: scale(1);
+    right: 1rem;
+    opacity: 1;
+
+  }
+
+  100% {
+    transform: scale(0);
+    right: -20rem;
+    opacity: 0;
   }
 }
 
@@ -712,6 +802,11 @@
 
   *::-webkit-scrollbar-thumb {
     display: none;
+  }
+
+  footer {
+    margin-bottom: 5rem;
+    margin-left: 0;
   }
 
   .navbar {

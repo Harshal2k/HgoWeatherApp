@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import firebaseConfig from "../Firebase";
 import { useSelector, useDispatch } from 'react-redux';
-import { setCountry, setSuggestion, setCity, setData, setProgress, setCoordinates, setPollutionData, setPollutants, setBulkWeatherData } from '../actions'
+import { setPopupState, setCountry, setSuggestion, setCity, setData, setProgress, setCoordinates, setPollutionData, setPollutants, setBulkWeatherData } from '../actions'
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import {
     initializeApp
@@ -49,7 +49,7 @@ async function suggestionSelected(value, dispatch, btnClicked, setProgress) {
                 }
             }
             if (!exists) {
-                alert(`"${formattedValue}" is not a city in "${country}", Please consider swithching the country OR use map to locate it.`);
+                dispatch(setPopupState({ status: 'show', message: `"${formattedValue}" is not a city in "${country}", Please consider swithching the country OR use map to locate it.`, type: 'error' }));
                 dispatch(setCountry(''));
             }
         } else {
@@ -67,9 +67,9 @@ async function suggestionSelected(value, dispatch, btnClicked, setProgress) {
         setProgress(100);
     } catch (error) {
         if (error === 404) {
-            alert(`"${formattedValue}" is NOT a CITY`);
+            dispatch(setPopupState({ status: 'show', message: `"${formattedValue}" is NOT a CITY`, type: 'error' }));
         } else {
-            alert(`Something went wrong :(\n${error}`);
+            dispatch(setPopupState({ status: 'show', message: `Something went wrong :( ${error}`, type: 'error' }));
         }
         resetStates(dispatch);
         setProgress(100);
@@ -127,7 +127,7 @@ async function getCities(code, dispatch, selectedCountryname, setProgress) {
         }
     } catch (err) {
         setProgress(100);
-        alert(`Something Went Wrong :(\n${err}`);
+        dispatch(setPopupState({ status: 'show', message: `Something went wrong :( ${err}`, type: 'error' }));
     } finally {
         gettingCities = false;
     }

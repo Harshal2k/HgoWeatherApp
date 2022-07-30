@@ -68,3 +68,10 @@ export const setNewsData = (newsData) => {
     }
 }
 
+export const setPopupState = (popupState) => {
+    return {
+        type: 'SET_POPUPSTATE',
+        payload: popupState,
+    }
+}
+

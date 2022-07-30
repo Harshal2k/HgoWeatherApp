@@ -9,6 +9,7 @@ import pollutantsReducer from './pollutants';
 import bulkWeatherData from './bulkWeatherData';
 import { combineReducers } from 'redux';
 import newsDataReducer from './newsData';
+import popupReducer from './popup';
 
 const allReducers = combineReducers({
     country: countryReducer,
@@ -21,6 +22,7 @@ const allReducers = combineReducers({
     pollutants: pollutantsReducer,
     bulkWeather: bulkWeatherData,
     newsData: newsDataReducer,
+    popupState: popupReducer
 });
 
 export default allReducers;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { setProgress, setBulkWeatherData } from "../../actions";
+import { setProgress, setBulkWeatherData, setPopupState } from "../../actions";
 import WeatherInfo from "../weatherComponents/weatherInfo";
 
 import moment from "moment";
@@ -14,16 +14,17 @@ async function getDataFromCoord(dispatch, coordinates, setDisplayData) {
     try {
         gettingHourlyData = true
         setProgress(0);
-        var res = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude=minutely&appid=78d818a07aa06aad2c5ca7f24be31e9f`);
+        var res = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude=minutely&appid=${process.env.REACT_APP_WEATHER_API}`);
         setProgress(65);
         const data = await res.json()
         setProgress(80);
         dispatch(setBulkWeatherData(data));
         setProgress(100);
         setDisplayData({ index: 0, length: 0, data: { empty: true } });
+        dispatch(setPopupState({ status: 'show', message: 'Successfully fetched data', type: 'success' }));
     } catch (error) {
         setProgress(100);
-        alert(`Something Went Wrong :(\n${error}`);
+        dispatch(setPopupState({ status: 'show', message: `Something Went Wrong :( ${error}`, type: 'error' }));
     } finally {
         gettingHourlyData = false;
     }

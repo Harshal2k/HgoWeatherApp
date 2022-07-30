@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setPollutionData, setPollutants, setCoordinates, setProgress } from "../../actions";
+import { setPollutionData, setPollutants, setCoordinates, setProgress, setPopupState } from "../../actions";
 import Pollutants from "./pollutants";
 import poor from '../../../src/static/poor.json'
 import veryPoor from '../../../src/static/veryPoor.json';
@@ -12,12 +12,12 @@ import moment from 'moment'
 import LoadingBar from "react-top-loading-bar";
 import icons from "../../Asset/SVG/svgIcons";
 
-var fetchStarted = false;
 var aqiComment = "-";
 var emote = good;
 var isEmoteChanged = false;
 var date = "-";
 var pollutionListLength = 0;
+var prevCoordinates = { lat: 0, lon: 0 };
 
 const Pollution = () => {
     const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const Pollution = () => {
     }
     console.log(coordinates === { lat: "-", lon: "-" } ? true : false);
     if (country === '' && city !== '' && coordinates.lat === "-") {
-        alert("Please locate your city on the map");
+        dispatch(setPopupState({ status: 'show', message: "Please locate your city on the map", type: 'error' }));
         dispatch(setCoordinates({ lat: 0, lon: 0 }))
     }
     let pollutionData = useSelector(state => state.pollutionData);
@@ -42,9 +42,9 @@ const Pollution = () => {
     let AQI = pollutantsData.aqi;
     console.log(pollutants);
     const polluntantsLen = Object.keys(pollutants).length;
-    if (Object.keys(pollutionData).length === 0) {
+    useEffect(() => {
         getPollutionData(coordinates, dispatch, setProgress);
-    }
+    }, [coordinates]);
     if (pollutionData && pollutionData.list && pollutionData.list.length > 0) {
         if (Object.keys(pollutants).length === 0) {
             dispatch(setPollutants({ index: 0, component: pollutionData.list[0].components, aqi: pollutionData.list[0].main.aqi }));
@@ -105,7 +105,7 @@ const Pollution = () => {
                 <p className="info-p addrText"><span className="mkBold">Lon:</span> {coordinates.lon}</p>
             </div>
             <div className="airQualityDiv">
-                <div className="lottieAnim"/>
+                <div className="lottieAnim" />
                 <div className="airQualityContainer">
                     <p style={{ letterSpacing: "0.3rem" }} className="info-h1">AIR QUALITY</p>
                     <p style={{ margin: "0.6rem" }} className="info-p">Air Quality Index = {AQI}</p>
@@ -127,21 +127,22 @@ const Pollution = () => {
 
 async function getPollutionData(coordinates, dispatch, setProgress) {
     try {
-        if (!fetchStarted && coordinates.lat !== "-" && coordinates.lon !== "-") {
+        if (coordinates.lat !== "-" && coordinates.lon !== '-' && prevCoordinates.lat != coordinates.lat && prevCoordinates.lon != coordinates.lon) {
+            prevCoordinates.lat = coordinates.lat;
+            prevCoordinates.lon = coordinates.lon;
             setProgress(0);
-            fetchStarted = true;
-            var res = await fetch(`http://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=78d818a07aa06aad2c5ca7f24be31e9f`);
+            var res = await fetch(`http://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${process.env.REACT_APP_WEATHER_API}`);
             setProgress(65);
             var data = await res.json();
             dispatch(setPollutionData(data));
+            dispatch(setPopupState({ status: 'show', message: 'Successfully fetched data', type: 'success' }));
             setProgress(80);
-            fetchStarted = false;
             setProgress(100);
         }
     } catch (err) {
         setProgress(100);
         dispatch(setPollutionData({}));
-        fetchStarted = false;
+        dispatch(setPopupState({ status: 'show', message: `Something Went Wrong :( ${err}`, type: 'error' }));
     }
 
 }
