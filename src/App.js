@@ -115,13 +115,6 @@ function App() {
         onLoaderFinished={() => setProgress(0)} />
       <div className="bg"></div>
       <Popup />
-      {/* <div className="popUp" style={popupStyle}>
-        <p style={{ fontSize: "1rem", letterSpacing: "0", marginRight: "2rem" }} className="info-p">{popupMessage}</p>
-        <div className="popUp-btn" onClick={() => { dispatch(setPopupState('close')); }}>
-          <span>&times;</span>
-          <div></div>
-        </div>
-      </div> */}
       <div>
         <nav className="navbar">
           <ul className="navbar-nav">
