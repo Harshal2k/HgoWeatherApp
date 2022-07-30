@@ -43,7 +43,7 @@ async function getAddressData(coord, dispatch, setProgress) {
     dispatch(setBulkWeatherData({}));
     dispatch(setData({}));
     dispatch(setPollutants({ index: 0, component: {}, aqi: 1 }));
-    var res = await fetch(`http://api.positionstack.com/v1/reverse?access_key=${process.env.REACT_APP_POINTSTACK_API}&query=${lat},${lon}`);
+    var res = await fetch(`https://thingproxy.freeboard.io/fetch/http://api.positionstack.com/v1/reverse?access_key=${process.env.REACT_APP_POINTSTACK_API}&query=${lat},${lon}`);
     setProgress(40)
     const data = await res.json();
     setProgress(55)
