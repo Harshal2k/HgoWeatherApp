@@ -11,7 +11,7 @@ var animation;
 const getNewsData = async (dispatch) => {
     try {
         console.log("in News data");
-        const res = await fetch(`https://newsapi.org/v2/everything?q=climate+change&searchIn=title&sortBy=publishedAt&apiKey=${process.env.REACT_APP_NEWS_API}`);
+        const res = await fetch(`https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/everything?q=climate+change&searchIn=title&sortBy=publishedAt&apiKey=${process.env.REACT_APP_NEWS_API}`);
         const data = await res.json()
         if (data?.status == 'error') {
             throw data?.message;
