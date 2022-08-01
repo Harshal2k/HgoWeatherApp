@@ -43,16 +43,24 @@ async function getAddressData(coord, dispatch, setProgress) {
     dispatch(setBulkWeatherData({}));
     dispatch(setData({}));
     dispatch(setPollutants({ index: 0, component: {}, aqi: 1 }));
-    var res = await fetch(`https://cors-anywhere.herokuapp.com/http://api.positionstack.com/v1/reverse?access_key=${process.env.REACT_APP_POINTSTACK_API}&query=${lat},${lon}`);
+    //var res = await fetch(`http://api.positionstack.com/v1/reverse?access_key=${process.env.REACT_APP_POINTSTACK_API}&query=${lat},${lon}`);
+    var res2 = await fetch(`https://us1.locationiq.com/v1/reverse?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&lat=${lat}&lon=${lon}&format=json`);
+    //var res3 = await fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&appid=${process.env.REACT_APP_WEATHER_API}`);
     setProgress(40)
-    const data = await res.json();
+    //const data = await res.json();
+    const data2 = await res2.json();
+    // const data3 = await res3.json();
+    // console.log({ data3 });
     setProgress(55)
-    if (data?.error) {
-      throw "error";
-    }
-    var resData = data.data ? data.data : {};
-    dispatch(setCountry((resData[0]?.country) ? resData[0].country : "--"));
-    dispatch(setCity((resData[0]?.locality) ? resData[0].locality : (resData[0]?.label) ? `--resetCity--${resData[0].label}` : "--"));
+    // if (data?.error) {
+    //   throw "error";
+    // }
+    //var resData = data.data ? data.data : {};
+    dispatch(setCountry(data2?.address?.country ? data2?.address?.country : "--"))
+    let address = data2?.display_name?.split(',').slice(0, 3);
+    console.log({ address });
+    //dispatch(setCountry((resData[0]?.country) ? resData[0].country : "--"));
+    dispatch(setCity(address && address.length > 0 ? `--resetCity--${String(address)}` : "--"));
     setProgress(75)
     dispatch(setCoordinates({ lat: lat, lon: lon }))
     hideMap();

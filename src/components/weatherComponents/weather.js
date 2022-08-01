@@ -38,7 +38,7 @@ const Weather = () => {
     let cityOrLocality = "City:"
     if (city.includes("--resetCity--")) {
         city = city.slice(13);
-        cityOrLocality = "Locality: "
+        cityOrLocality = "Address: "
     }
     const coordinates = useSelector(state => state.coordinates);
     var sunrise = "-";
