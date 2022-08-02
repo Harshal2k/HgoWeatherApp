@@ -91,7 +91,7 @@ function App() {
   }
 
   useEffect(() => {
-    if (location.pathname === "HgoWeatherApp/") {
+    if (location.pathname === "HgoWeatherApp") {
       activate("svg1");
       setNavName("🏠 Home");
     } else if (location.pathname === 'HgoWeatherApp/pollution') {
