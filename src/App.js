@@ -91,25 +91,25 @@ function App() {
   }
 
   useEffect(() => {
-    if (location.pathname === "/") {
+    if (location.pathname === "HgoWeatherApp/") {
       activate("svg1");
       setNavName("🏠 Home");
-    } else if (location.pathname === '/pollution') {
+    } else if (location.pathname === 'HgoWeatherApp/pollution') {
       activate("svg2");
       setNavName("🏭 Pollution");
-    } else if (location.pathname === '/hourlyWeatherData') {
+    } else if (location.pathname === 'HgoWeatherApp/hourlyWeatherData') {
       activate("svg3");
       setNavName("⏳ Hourly Weather Data");
-    } else if (location.pathname === '/dailyWeatherData') {
+    } else if (location.pathname === 'HgoWeatherApp/dailyWeatherData') {
       activate("svg4");
       setNavName("📆 Daily Weather Data");
-    } else if (location.pathname === '/news') {
+    } else if (location.pathname === 'HgoWeatherApp/news') {
       activate("svg5");
       setNavName("📻 News");
-    } else if (location.pathname === '/contact') {
+    } else if (location.pathname === 'HgoWeatherApp/contact') {
       activate("svg6");
       setNavName("☎️ Contact");
-    } else if (location.pathname === '/about') {
+    } else if (location.pathname === 'HgoWeatherApp/about') {
       activate("svg7");
       setNavName("📝 About");
     }
