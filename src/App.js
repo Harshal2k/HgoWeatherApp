@@ -92,25 +92,25 @@ function App() {
 
   useEffect(() => {
     console.log({ location });
-    if (location.pathname === "/HgoWeatherApp") {
+    if (location.pathname === "") {
       activate("svg1");
       setNavName("🏠 Home");
-    } else if (location.pathname === '/HgoWeatherApp/pollution') {
+    } else if (location.pathname === '/pollution') {
       activate("svg2");
       setNavName("🏭 Pollution");
-    } else if (location.pathname === '/HgoWeatherApp/hourlyWeatherData') {
+    } else if (location.pathname === '/hourlyWeatherData') {
       activate("svg3");
       setNavName("⏳ Hourly Weather Data");
-    } else if (location.pathname === '/HgoWeatherApp/dailyWeatherData') {
+    } else if (location.pathname === '/dailyWeatherData') {
       activate("svg4");
       setNavName("📆 Daily Weather Data");
-    } else if (location.pathname === '/HgoWeatherApp/news') {
+    } else if (location.pathname === '/news') {
       activate("svg5");
       setNavName("📻 News");
-    } else if (location.pathname === '/HgoWeatherApp/contact') {
+    } else if (location.pathname === '/contact') {
       activate("svg6");
       setNavName("☎️ Contact");
-    } else if (location.pathname === '/HgoWeatherApp/about') {
+    } else if (location.pathname === '/about') {
       activate("svg7");
       setNavName("📝 About");
     }
@@ -134,49 +134,49 @@ function App() {
               </a>
             </li>
             <li className="nav-item" onClick={() => { activate("svg1"); setNavName("🏠 Home"); }}>
-              <Link className="nav-link" to="HgoWeatherApp/">
+              <Link className="nav-link" to="/">
                 {icons.home}
                 <span className="link-text">Home</span>
               </Link>
             </li>
 
             <li className="nav-item" onClick={() => { activate("svg2"); setNavName("🏭 Pollution"); }}>
-              <Link className="nav-link" to="HgoWeatherApp/pollution">
+              <Link className="nav-link" to="/pollution">
                 {icons.pollution}
                 <span className="link-text">Pollution</span>
               </Link>
             </li>
 
             <li className="nav-item" onClick={() => { activate("svg3"); setNavName("⏳ Hourly Weather Data"); }}>
-              <Link className="nav-link" to="HgoWeatherApp/hourlyWeatherData">
+              <Link className="nav-link" to="/hourlyWeatherData">
                 {icons.hourlyWeather}
                 <span style={{ marginLeft: "0.7rem" }} className="link-text">Hourly Weather Data</span>
               </Link>
             </li>
 
             <li className="nav-item" onClick={() => { activate("svg4"); setNavName("📆 Daily Weather Data"); }}>
-              <Link className="nav-link" to="HgoWeatherApp/dailyWeatherData">
+              <Link className="nav-link" to="/dailyWeatherData">
                 {icons.dailyWeather}
                 <span style={{ marginLeft: "0.7rem" }} className="link-text">Daily Weather Data</span>
               </Link>
             </li>
 
             <li className="nav-item" onClick={() => { activate("svg5"); setNavName("📻 News"); }}>
-              <Link className="nav-link" to="HgoWeatherApp/news">
+              <Link className="nav-link" to="/news">
                 {icons.news}
                 <span className="link-text">News</span>
               </Link>
             </li>
 
             <li className="nav-item" onClick={() => { activate("svg6"); setNavName("☎️ Contact"); }}>
-              <Link className="nav-link" to="HgoWeatherApp/contact">
+              <Link className="nav-link" to="/contact">
                 {icons.contact}
                 <span className="link-text">Contact</span>
               </Link>
             </li>
 
             <li className="nav-item" onClick={() => { activate("svg7"); setNavName("📝 About"); }}>
-              <Link className="nav-link" to="HgoWeatherApp/about">
+              <Link className="nav-link" to="/about">
                 {icons.aboutUs}
                 <span className="link-text">About</span>
               </Link>
@@ -196,13 +196,13 @@ function App() {
         <h2 id="abc" className="App-h1" style={{ padding: "0.8rem" }}>{navName}</h2>
         <Search show={!['📻 News', '☎️ Contact', '📝 About'].includes(navName)} />
         <Routes>
-          <Route path="HgoWeatherApp/" element={<Weather />}></Route>
-          <Route path="HgoWeatherApp/pollution" element={<Pollution />}></Route>
-          <Route path="HgoWeatherApp/hourlyWeatherData" element={<HourlyWeatherData />}></Route>
-          <Route path="HgoWeatherApp/dailyWeatherData" element={<DailyWeatherData />}></Route>
-          <Route path="HgoWeatherApp/news" element={<News />}></Route>
-          <Route path="HgoWeatherApp/contact" element={<ContactInfo />}></Route>
-          <Route path="HgoWeatherApp/about" element={<About />}></Route>
+          <Route path="/" element={<Weather />}></Route>
+          <Route path="/pollution" element={<Pollution />}></Route>
+          <Route path="/hourlyWeatherData" element={<HourlyWeatherData />}></Route>
+          <Route path="/dailyWeatherData" element={<DailyWeatherData />}></Route>
+          <Route path="/news" element={<News />}></Route>
+          <Route path="/contact" element={<ContactInfo />}></Route>
+          <Route path="/about" element={<About />}></Route>
         </Routes>
       </div>
       <div id="mapCont" style={{ display: "none", position: "absolute", height: "100%", width: "100%", top: "0%", zIndex: "2" }}>
