@@ -1,17 +1,22 @@
 
-import { React, useState, useEffect } from "react";
+import { React, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import LoadingBar from "react-top-loading-bar";
 import { setNewsData, setPopupState } from "../../actions";
 import lottie from 'lottie-web';
-import icons from "../../Asset/SVG/svgIcons";
 import newsLoading from '../../../src/static/news-loading.json';
 
 var animation;
 const getNewsData = async (dispatch) => {
     try {
         console.log("in News data");
-        const res = await fetch(`https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/everything?q=climate+change&searchIn=title&sortBy=publishedAt&apiKey=${process.env.REACT_APP_NEWS_API}`);
+        const res = await fetch(`https://api.newscatcherapi.com/v2/search?q=climate+change&lang=en&search_in=title&sort_by=date`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'x-api-key': process.env.REACT_APP_NEWSCATCHERAPI_API_KEY,
+            },
+        });
         const data = await res.json()
         if (data?.status == 'error') {
             throw data?.message;
@@ -29,7 +34,6 @@ const getNewsData = async (dispatch) => {
 const News = () => {
     const dispatch = useDispatch();
     const newsData = useSelector(state => state.newsData);
-    const [progress, setProgress] = useState(0);
     useEffect(() => {
         if (Object.keys(newsData).length == 0) {
             getNewsData(dispatch);
@@ -48,9 +52,9 @@ const News = () => {
         <div className="other-details-cont">
             <div className="loadingAnim" />
             {newsData?.articles?.map(dataElem =>
-            (<a href={dataElem?.url || '#'} target="_blank" className="newsCotainer OD-div">
-                <p style={{ marginBottom: "0.3rem" }} className="info-p">Source: {dataElem?.source?.name || '-'}</p>
-                <img className="newsImage" src={dataElem?.urlToImage} />
+            (<a href={dataElem?.link || '#'} target="_blank" className="newsCotainer OD-div">
+                <p style={{ marginBottom: "0.3rem" }} className="info-p">Source: {dataElem?.authors || '-'}</p>
+                <img className="newsImage" src={dataElem?.media} />
                 <h2 className="newsTitle info-h1">{dataElem?.title || '-'}</h2>
             </a>
             ))}
