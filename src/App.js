@@ -92,7 +92,7 @@ function App() {
 
   useEffect(() => {
     console.log({ location });
-    if (location.pathname === "") {
+    if (location.pathname === "/") {
       activate("svg1");
       setNavName("🏠 Home");
     } else if (location.pathname === '/pollution') {
