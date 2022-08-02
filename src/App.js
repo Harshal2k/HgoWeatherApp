@@ -133,49 +133,49 @@ function App() {
               </a>
             </li>
             <li className="nav-item" onClick={() => { activate("svg1"); setNavName("🏠 Home"); }}>
-              <Link className="nav-link" to="/">
+              <Link className="nav-link" to="HgoWeatherApp/">
                 {icons.home}
                 <span className="link-text">Home</span>
               </Link>
             </li>
 
             <li className="nav-item" onClick={() => { activate("svg2"); setNavName("🏭 Pollution"); }}>
-              <Link className="nav-link" to="/pollution">
+              <Link className="nav-link" to="HgoWeatherApp/pollution">
                 {icons.pollution}
                 <span className="link-text">Pollution</span>
               </Link>
             </li>
 
             <li className="nav-item" onClick={() => { activate("svg3"); setNavName("⏳ Hourly Weather Data"); }}>
-              <Link className="nav-link" to="/hourlyWeatherData">
+              <Link className="nav-link" to="HgoWeatherApp/hourlyWeatherData">
                 {icons.hourlyWeather}
                 <span style={{ marginLeft: "0.7rem" }} className="link-text">Hourly Weather Data</span>
               </Link>
             </li>
 
             <li className="nav-item" onClick={() => { activate("svg4"); setNavName("📆 Daily Weather Data"); }}>
-              <Link className="nav-link" to="/dailyWeatherData">
+              <Link className="nav-link" to="HgoWeatherApp/dailyWeatherData">
                 {icons.dailyWeather}
                 <span style={{ marginLeft: "0.7rem" }} className="link-text">Daily Weather Data</span>
               </Link>
             </li>
 
             <li className="nav-item" onClick={() => { activate("svg5"); setNavName("📻 News"); }}>
-              <Link className="nav-link" to="/news">
+              <Link className="nav-link" to="HgoWeatherApp/news">
                 {icons.news}
                 <span className="link-text">News</span>
               </Link>
             </li>
 
             <li className="nav-item" onClick={() => { activate("svg6"); setNavName("☎️ Contact"); }}>
-              <Link className="nav-link" to="/contact">
+              <Link className="nav-link" to="HgoWeatherApp/contact">
                 {icons.contact}
                 <span className="link-text">Contact</span>
               </Link>
             </li>
 
             <li className="nav-item" onClick={() => { activate("svg7"); setNavName("📝 About"); }}>
-              <Link className="nav-link" to="/about">
+              <Link className="nav-link" to="HgoWeatherApp/about">
                 {icons.aboutUs}
                 <span className="link-text">About</span>
               </Link>
@@ -195,13 +195,13 @@ function App() {
         <h2 id="abc" className="App-h1" style={{ padding: "0.8rem" }}>{navName}</h2>
         <Search show={!['📻 News', '☎️ Contact', '📝 About'].includes(navName)} />
         <Routes>
-          <Route path="/" element={<Weather />}></Route>
-          <Route path="/pollution" element={<Pollution />}></Route>
-          <Route path="/hourlyWeatherData" element={<HourlyWeatherData />}></Route>
-          <Route path="/dailyWeatherData" element={<DailyWeatherData />}></Route>
-          <Route path="/news" element={<News />}></Route>
-          <Route path="/contact" element={<ContactInfo />}></Route>
-          <Route path="/about" element={<About />}></Route>
+          <Route path="HgoWeatherApp/" element={<Weather />}></Route>
+          <Route path="HgoWeatherApp/pollution" element={<Pollution />}></Route>
+          <Route path="HgoWeatherApp/hourlyWeatherData" element={<HourlyWeatherData />}></Route>
+          <Route path="HgoWeatherApp/dailyWeatherData" element={<DailyWeatherData />}></Route>
+          <Route path="HgoWeatherApp/news" element={<News />}></Route>
+          <Route path="HgoWeatherApp/contact" element={<ContactInfo />}></Route>
+          <Route path="HgoWeatherApp/about" element={<About />}></Route>
         </Routes>
       </div>
       <div id="mapCont" style={{ display: "none", position: "absolute", height: "100%", width: "100%", top: "0%", zIndex: "2" }}>
