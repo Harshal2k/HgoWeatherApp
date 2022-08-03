@@ -216,7 +216,7 @@ function App() {
           <button className="cartoonButtons CB-getPolluData"
             onClick={async () => {
               await getAddressData(coord, dispatch, setProgress);
-            }}>Get Pollution Report</button>
+            }}>Get Details</button>
         </div>
       </div>
       <footer>
