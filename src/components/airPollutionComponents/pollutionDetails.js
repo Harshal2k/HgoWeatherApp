@@ -131,7 +131,7 @@ async function getPollutionData(coordinates, dispatch, setProgress) {
             prevCoordinates.lat = coordinates.lat;
             prevCoordinates.lon = coordinates.lon;
             setProgress(0);
-            var res = await fetch(`http://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${process.env.REACT_APP_WEATHER_API}`);
+            var res = await fetch(`https://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${process.env.REACT_APP_WEATHER_API}`);
             setProgress(65);
             var data = await res.json();
             dispatch(setPollutionData(data));
