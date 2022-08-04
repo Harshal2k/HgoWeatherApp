@@ -235,7 +235,7 @@ const ContactInfo = () => {
     return (
         <>
             <div className="OD-div">
-                <h2 className="info-h1 contactTitle">RATE THIS WEBSITE</h2>
+                <h2 className="info-h1 contactTitle">RATE THIS WEBSITE ⭐</h2>
                 <div className="other-details-cont">
                     <div id="EC1" style={emoteContainer} onClick={() => { handleClick("excellent") }}>
                         <div id="E1" className="emote lottieAnim rateEmote" />
