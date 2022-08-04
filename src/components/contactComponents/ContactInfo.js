@@ -9,6 +9,7 @@ import sendingMessage from '../../../src/static/sendingMessage.json';
 import firebaseConfig from "../../Firebase";
 import { initializeApp } from "firebase/app";
 import { addDoc, collection, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
+import icons from "../../Asset/SVG/svgIcons";
 
 
 const ContactInfo = () => {
@@ -114,7 +115,7 @@ const ContactInfo = () => {
         position: "absolute",
         margin: "50%",
         transform: "translate(-50%, -50%)",
-        fontSize: "3.2vmax",
+        fontSize: "2.5vmax",
         color: 'cornflowerblue',
         display: 'none',
     }
@@ -261,6 +262,17 @@ const ContactInfo = () => {
                         <h3 id="R5" className="info-h1" style={percentText}>93%</h3>
                         <p style={{ fontSize: "1.8vmax", fontWeight: "100" }} className="info-p">Bad</p>
                     </div>
+                </div>
+            </div>
+
+            <div style={{ width: "72.5rem", maxWidth: "96%" }} className="OD-div">
+                <h2 className="info-h1 contactTitle">SOCIAL 🌐</h2>
+                <div className="other-details-cont" style={{ justifyContent: 'space-evenly' }}>
+                    <a target="_blank" href="https://www.linkedin.com/in/harshal-gosawi-1382b6238" className="socialIcons" id="linkedin">{icons.linkedin}</a>
+                    <a target="_blank" href="https://www.instagram.com/harshal2k/" className="socialIcons" id="instagram">{icons.instagram}</a>
+                    <a target="_blank" href="https://youtube.com/c/HGOriginals" className="socialIcons" id="youtube">{icons.youtube}</a>
+                    <a target="_blank" href="https://twitter.com/harshal2k?t=bORAy91hBS26XRTeiAOGGw&s=09" className="socialIcons" id="twitter">{icons.twitter}</a>
+                    <a target="_blank" href="https://www.facebook.com/harshal.gosawi.16  " className="socialIcons" id="facebook">{icons.facebook}</a>
                 </div>
             </div>
 

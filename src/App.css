@@ -17,6 +17,7 @@
   --nav-text: #626262;
   --nav-active: #0ca0e8;
   --nav-hover: #06c624;
+  --transition-val: all 600ms ease;
 }
 
 [data-theme='dark'] {
@@ -78,7 +79,7 @@ footer {
   padding: 4rem;
   background-color: var(--secondary);
   margin-top: 2rem;
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 #hgIcon {
@@ -128,7 +129,7 @@ footer #hgIcon {
   right: -0.25rem;
   z-index: -1;
   border-radius: 100%;
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 .popUp-btn span {
@@ -150,14 +151,14 @@ footer #hgIcon {
   background-color: var(--primary);
   width: 100%;
   z-index: -1;
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 .App {
   text-align: center;
   height: fit-content;
   background-color: var(--primary);
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 .navbar {
@@ -227,7 +228,7 @@ footer #hgIcon {
   background: var(--secondary);
   font-size: 1.5rem;
   letter-spacing: 0.3ch;
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 .logo svg {
@@ -303,7 +304,7 @@ footer #hgIcon {
   height: -moz-fit-content;
   height: fit-content;
   margin-top: 2vmax;
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 .cartoonButtons {
@@ -353,7 +354,7 @@ footer #hgIcon {
   background-color: var(--primary);
   height: 2rem;
   max-width: 90%;
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 .mkBold {
@@ -385,7 +386,7 @@ footer #hgIcon {
   border: 0.1vmax solid var(--border);
   box-shadow: var(--shadow);
   background-color: var(--primary);
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 .searchDiv-button:active {
@@ -402,14 +403,14 @@ footer #hgIcon {
 .btnLeft {
   border-radius: 5vmax 0 0 5vmax;
   background-color: var(--left-btn-color);
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 .btnRight {
   border-radius: 0 5vmax 5vmax 0;
   margin-left: 1rem;
   background-color: var(--right-btn-color);
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 .searchDiv-Input {
@@ -428,7 +429,7 @@ footer #hgIcon {
   max-width: 100%;
   margin-left: 1rem;
   margin-right: 1rem;
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 .searchDiv-ul {
@@ -440,7 +441,7 @@ footer #hgIcon {
   border-radius: 0 0 0.7vmax 0.7vmax;
   margin-left: 1.6rem;
   box-shadow: 0.3rem 0.3rem 2rem var(--accent2);
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 .searchDiv-li {
@@ -448,7 +449,7 @@ footer #hgIcon {
   padding: 0.3vmax 0.3vmax 0.3vmax 0.9vmax;
   cursor: pointer;
   border-radius: 0.7vmax;
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 .searchDiv-li:hover {
@@ -475,7 +476,7 @@ footer #hgIcon {
   max-width: 70%;
   margin-left: 1rem;
   margin-right: 1rem;
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 
@@ -487,7 +488,7 @@ footer #hgIcon {
   width: 8rem;
   position: relative;
   background-image: linear-gradient(to bottom right, red, yellow);
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 .weather-temp-h1 {
@@ -496,7 +497,7 @@ footer #hgIcon {
   position: relative;
   margin-top: 14%;
   transform: translateY(-50%);
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 .weather-temp-p {
@@ -504,7 +505,7 @@ footer #hgIcon {
   font-size: 0.7vmax;
   position: relative;
   margin-top: -16%;
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 .weather-info {
@@ -520,7 +521,7 @@ footer #hgIcon {
   margin-right: 0.2rem;
   border-radius: 10%;
   padding: 1vmax;
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 .info-p {
@@ -529,14 +530,14 @@ footer #hgIcon {
   font-size: 0.7rem;
   letter-spacing: 0.1vmax;
   font-weight: 500;
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 .info-h1 {
   font-family: 'Cabin', cursive;
   color: var(--text-primary);
   font-size: 1.4rem;
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 .other-details-cont {
@@ -562,7 +563,7 @@ footer #hgIcon {
   width: fit-content;
   margin-left: 1vmax;
   margin-right: 1vmax;
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 
@@ -600,7 +601,7 @@ footer #hgIcon {
   justify-content: space-evenly;
   display: flex;
   flex-wrap: wrap;
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 .addrText {
@@ -618,7 +619,7 @@ footer #hgIcon {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 
@@ -639,7 +640,7 @@ footer #hgIcon {
   border-radius: 0.7rem;
   font-family: 'Cabin', cursive;
   color: var(--text-primary);
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 .neumorphismEffect {
@@ -648,7 +649,7 @@ footer #hgIcon {
   border-radius: 1vmax;
   background-color: var(--primary);
   box-shadow: var(--shadow);
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 .newsCotainer {
@@ -688,7 +689,7 @@ footer #hgIcon {
   width: 14rem;
   padding: 1rem;
   border-radius: 100%;
-  transition: all 600ms ease;
+  transition: var(--transition-val);
   /* filter: drop-shadow(0.3vmax 0.3vmax 0.6vmax var(--accent2)) drop-shadow(-0.3vmax -0.3vmax 0.6vmax var(--accent1));
   border: 1px solid var(--border); */
 }
@@ -711,7 +712,7 @@ footer #hgIcon {
   height: fit-content;
   width: 100%;
   padding: 0.5rem;
-  transition: all 600ms ease;
+  transition: var(--transition-val);
 }
 
 .rateEmote:hover {
@@ -737,6 +738,38 @@ footer #hgIcon {
   line-height: 1.8;
   font-size: 1.3rem;
 }
+
+.socialIcons {
+  width: 4rem;
+  max-width: 10%;
+  fill: var(--accent2);
+  cursor: pointer;
+  transition: var(--transition-val);
+}
+.socialIcons:hover{
+  filter: drop-shadow(0.3vmax 0.3vmax 0.6vmax var(--accent2)) drop-shadow(-0.3vmax -0.3vmax 0.6vmax var(--accent1));
+}
+
+#linkedin:hover {
+  fill: #0072b1;
+}
+
+#youtube:hover {
+  fill: #FF0000;
+}
+
+#twitter:hover {
+  fill: #00acee;
+}
+
+#facebook:hover {
+  fill: #3b5998;
+}
+
+#instagram:hover {
+  fill: #fb3958;
+}
+
 
 
 /*-------------------ANIMATIONS----------------------------------*/
