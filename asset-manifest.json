@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/HgoWeatherApp-dev/static/css/main.760e1024.css",
-    "main.js": "/HgoWeatherApp-dev/static/js/main.57eb52c1.js",
-    "static/js/787.75a9a1f9.chunk.js": "/HgoWeatherApp-dev/static/js/787.75a9a1f9.chunk.js",
-    "index.html": "/HgoWeatherApp-dev/index.html",
-    "main.760e1024.css.map": "/HgoWeatherApp-dev/static/css/main.760e1024.css.map",
-    "main.57eb52c1.js.map": "/HgoWeatherApp-dev/static/js/main.57eb52c1.js.map",
-    "787.75a9a1f9.chunk.js.map": "/HgoWeatherApp-dev/static/js/787.75a9a1f9.chunk.js.map"
+    "main.css": "/HgoWeatherApp/static/css/main.760e1024.css",
+    "main.js": "/HgoWeatherApp/static/js/main.1e233fd3.js",
+    "static/js/787.75a9a1f9.chunk.js": "/HgoWeatherApp/static/js/787.75a9a1f9.chunk.js",
+    "index.html": "/HgoWeatherApp/index.html",
+    "main.760e1024.css.map": "/HgoWeatherApp/static/css/main.760e1024.css.map",
+    "main.1e233fd3.js.map": "/HgoWeatherApp/static/js/main.1e233fd3.js.map",
+    "787.75a9a1f9.chunk.js.map": "/HgoWeatherApp/static/js/787.75a9a1f9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.760e1024.css",
-    "static/js/main.57eb52c1.js"
+    "static/js/main.1e233fd3.js"
   ]
 }
