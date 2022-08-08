@@ -188,7 +188,7 @@ function App() {
         </nav>
       </div>
       <div className="AppDiv">
-        <h1 className="App-h1" style={{ borderRadius: "2rem", padding: "1.2rem" }}><span style={{ display: 'block' }}>{icons.hgo}</span>HGO Weather App</h1>
+        <h1 className="App-h1" style={{ borderRadius: "2rem", padding: "1.2rem" }}><span style={{ display: 'block' }}>{icons.hgo}</span>HGO Weather App dev</h1>
         <h2 id="abc" className="App-h1" style={{ padding: "0.8rem" }}>{navName}</h2>
         <Search show={!['📻 News', '☎️ Contact', '📝 About'].includes(navName)} />
         <Routes>
