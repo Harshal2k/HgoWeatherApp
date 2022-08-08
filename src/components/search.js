@@ -60,7 +60,6 @@ async function suggestionSelected(value, dispatch, btnClicked, setProgress) {
         dispatch(setSuggestion([]));
         dispatch(setCity(formattedValue));
         dispatch(setPollutionData({}));
-        console.log("reset")
         dispatch(setBulkWeatherData({}));
         dispatch(setData({}));
         dispatch(setPollutants({ index: 0, component: {}, aqi: 1 }));
@@ -96,7 +95,6 @@ function renderSuggestions(dispatch, suggestions) {
 
 async function getCities(code, dispatch, selectedCountryname, setProgress) {
     try {
-        console.log("getting cities")
         gettingCities = true;
         setProgress(10);
         initializeApp(firebaseConfig);
@@ -192,7 +190,6 @@ function displayMap() {
 }
 
 const Search = ({ show = true }) => {
-    console.log(show);
     const [progress, setProgress] = useState(0);
     let renderSearch = useRenderSearch(setProgress);
     return (

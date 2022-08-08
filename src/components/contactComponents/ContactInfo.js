@@ -61,7 +61,6 @@ const ContactInfo = () => {
             initializeApp(firebaseConfig);
             const db = getFirestore()
             const ratingsData = await getDoc(doc(db, 'Rating', 'ratingDetails'));
-            console.log(ratingsData.data());
             setRatings(ratingsData.data());
         } catch (error) {
             console.log(error);
@@ -69,7 +68,6 @@ const ContactInfo = () => {
     };
 
     const setRatingDetails = async (rName, rating, count) => {
-        console.log({ rName, rating });
         try {
             initializeApp(firebaseConfig);
             const db = getFirestore();

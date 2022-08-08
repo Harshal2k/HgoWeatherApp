@@ -22,7 +22,6 @@ async function getDataFromCoord(dispatch, coordinates, setProgress) {
         setProgress(100);
     } catch (error) {
         dispatch(setPopupState({ status: 'show', message: `Something Went Wrong :(\n${error}`, type: 'error' }));
-        console.log(error.message)
         setProgress(100);
     } finally {
         gettingData = false;

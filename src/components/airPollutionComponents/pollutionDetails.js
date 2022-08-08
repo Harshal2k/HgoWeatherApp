@@ -30,7 +30,6 @@ const Pollution = () => {
         city = city.slice(13);
         cityOrLocality = "Locality: "
     }
-    console.log(coordinates === { lat: "-", lon: "-" } ? true : false);
     if (country === '' && city !== '' && coordinates.lat === "-") {
         dispatch(setPopupState({ status: 'show', message: "Please locate your city on the map", type: 'error' }));
         dispatch(setCoordinates({ lat: 0, lon: 0 }))
@@ -40,7 +39,6 @@ const Pollution = () => {
     let pollutantsIndex = pollutantsData.index;
     let pollutants = pollutantsData.component;
     let AQI = pollutantsData.aqi;
-    console.log(pollutants);
     const polluntantsLen = Object.keys(pollutants).length;
     useEffect(() => {
         getPollutionData(coordinates, dispatch, setProgress);
@@ -155,7 +153,6 @@ function change(data, index, dispatch, isUp) {
     } else {
         index = index - 1;
     }
-    console.log(index);
 
     if ("components" in data.list[index]) {
         dispatch(setPollutants({ index: index, component: data.list[index].components, aqi: data.list[index].main.aqi }));

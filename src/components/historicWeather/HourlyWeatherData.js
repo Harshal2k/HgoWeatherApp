@@ -36,7 +36,6 @@ function change(data, index, setDisplayData, isUp) {
     } else {
         index = index - 1;
     }
-    console.log(index);
 
     if (data[index]) {
         setDisplayData({ index: index, length: data.length, data: data[index] })

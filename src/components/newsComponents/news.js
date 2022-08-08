@@ -8,7 +8,6 @@ import newsLoading from '../../../src/static/news-loading.json';
 var animation;
 const getNewsData = async (dispatch) => {
     try {
-        console.log("in News data");
         const res = await fetch(`https://api.newscatcherapi.com/v2/search?q=climate+change&lang=en&search_in=title&sort_by=date`, {
             method: 'GET',
             headers: {
@@ -40,7 +39,6 @@ const News = () => {
         }
     }, [dispatch]);
     useEffect(() => {
-        console.log({ newsData });
         if (Object.keys(newsData).length == 0) {
             animation = lottie.loadAnimation({
                 container: document.querySelector(".loadingAnim"),

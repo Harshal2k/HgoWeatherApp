@@ -34,7 +34,6 @@ function change(data, index, setDisplayData, isUp) {
     } else {
         index = index - 1;
     }
-    console.log(index);
 
     if (data[index]) {
         //dispatch(setPollutants({index:index,component:data.list[index].components,aqi:data.list[index].main.aqi}));
@@ -146,7 +145,6 @@ const DailyWeatherData = () => {
     const coordinates = useSelector(state => state.coordinates);
 
     if (!gettingDailyData && hWeatherData && Object.keys(hWeatherData).length <= 0 && coordinates.lat !== '-') {
-        console.log("1111111111111111111111111111");
         getDataFromCoord(dispatch, coordinates, setDisplayData);
     }
 

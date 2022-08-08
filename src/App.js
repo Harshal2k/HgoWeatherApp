@@ -50,7 +50,6 @@ async function getAddressData(coord, dispatch, setProgress) {
     //const data = await res.json();
     const data2 = await res2.json();
     // const data3 = await res3.json();
-    // console.log({ data3 });
     setProgress(55)
     // if (data?.error) {
     //   throw "error";
@@ -58,14 +57,12 @@ async function getAddressData(coord, dispatch, setProgress) {
     //var resData = data.data ? data.data : {};
     dispatch(setCountry(data2?.address?.country ? data2?.address?.country : "--"))
     let address = data2?.display_name?.split(',').slice(0, 3);
-    console.log({ address });
     //dispatch(setCountry((resData[0]?.country) ? resData[0].country : "--"));
     dispatch(setCity(address && address.length > 0 ? `--resetCity--${String(address)}` : "--"));
     setProgress(75)
     dispatch(setCoordinates({ lat: lat, lon: lon }))
     hideMap();
   } catch (error) {
-    console.log({ error });
     dispatch(setPollutants({ index: 0, component: {}, aqi: 1 }));
     hideMap();
     dispatch(setPopupState({ status: 'show', message: `Something Went Wrong :( ${error}`, type: 'error' }));
@@ -91,7 +88,6 @@ function App() {
   }
 
   useEffect(() => {
-    console.log({ location });
     if (location.pathname === "/") {
       activate("svg1");
       setNavName("🏠 Home");
