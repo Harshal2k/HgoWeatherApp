@@ -72,6 +72,14 @@
   /* Firefox */
   -ms-user-select: none;
   font-family: 'Cabin', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.body-light{
+  background-color: #e6e7ee;
+}
+.body-dark{
+  background-color: #1A1A1A;
 }
 
 footer {
@@ -89,6 +97,11 @@ footer {
 footer #hgIcon {
   width: 8rem;
 }
+
+.mapBox {
+  background-color: #a0d4e1;
+}
+
 
 .popUp {
   position: fixed;
@@ -162,11 +175,8 @@ footer #hgIcon {
 }
 
 .navbar {
-  width: 5rem;
-  height: 100vh;
   position: fixed;
   background-color: var(--nav-primary);
-  transition: width, 600ms ease;
   padding: 0.5rem;
   z-index: 2;
 }
@@ -307,39 +317,45 @@ footer #hgIcon {
   transition: var(--transition-val);
 }
 
-.cartoonButtons {
+
+
+.animate {
+  transition: all 0.1s;
+  -webkit-transition: all 0.1s;
+}
+
+.action-button {
   position: relative;
-  padding-left: 0.7rem;
-  padding-right: 0.7rem;
-  padding-top: 0.3rem;
-  padding-bottom: 0.3rem;
-  border-radius: 0.3rem;
-  border: none;
-  font-size: 1.5rem;
-  font-family: 'Cabin', cursive;
-  color: #ffffff;
+  padding: 0.2rem 0.6rem;
   margin-top: 1rem;
-  transition: all 250ms;
+  border-radius: 0.4rem;
+  border: none;
+  font-size: 2rem;
+  font-family: 'Cabin', cursive;
+  color: #FFF;
+  text-decoration: none;
+}
+
+.green {
+  margin-left: 1.5rem;
+  background-color: #82BF56;
+  border-bottom: 0.4rem solid #669644;
+  text-shadow: 0px -0.1rem #669644;
+}
+
+.red {
+  background-color: #E74C3C;
+  border-bottom: 0.4rem solid #BD3E31;
+  text-shadow: 0px -0.1rem #BD3E31;
+}
+
+.action-button:active {
+  transform: translate(0px, 0.1rem);
+  -webkit-transform: translate(0px, 0.1rem);
+  border-bottom: 0.1rem solid;
 }
 
 
-
-.CB-close {
-  background-color: rgb(240, 60, 60);
-}
-
-.CB-close:hover {
-  background-color: rgb(196, 37, 37);
-}
-
-.CB-getPolluData {
-  margin-left: 1rem;
-  background-color: rgb(138 41 227);
-}
-
-.CB-getPolluData:hover {
-  background-color: rgb(96, 27, 160);
-}
 
 .selectStyle {
   font-size: 1rem;
@@ -746,7 +762,8 @@ footer #hgIcon {
   cursor: pointer;
   transition: var(--transition-val);
 }
-.socialIcons:hover{
+
+.socialIcons:hover {
   filter: drop-shadow(0.3vmax 0.3vmax 0.6vmax var(--accent2)) drop-shadow(-0.3vmax -0.3vmax 0.6vmax var(--accent1));
 }
 
@@ -828,7 +845,7 @@ footer #hgIcon {
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media screen and (max-width: 600px) {
   *::-webkit-scrollbar {
     display: none;
   }
@@ -902,11 +919,12 @@ footer #hgIcon {
 }
 
 /* Large screens */
-@media only screen and (min-width: 600px) {
+@media screen and (min-width: 600px) {
   .navbar {
     top: 0;
     width: 5rem;
     height: 100vh;
+    transition: width, 600ms ease;
   }
 
   .navbar:hover {

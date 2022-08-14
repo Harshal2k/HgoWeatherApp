@@ -21,6 +21,7 @@ import Popup from "./components/Popup";
 function hideMap() {
   document.querySelector("#mapCont").style.display = "none";
   document.querySelector(".AppDiv").style.display = "flex";
+  document.querySelector(".App").style.overflow="auto";
 }
 
 function activate(svgId) {
@@ -31,8 +32,8 @@ function activate(svgId) {
 }
 
 async function getAddressData(coord, dispatch, setProgress) {
-  const close = document.querySelector(".CB-close");
-  const getPolluData = document.querySelector(".CB-getPolluData");
+  const close = document.querySelector(".red");
+  const getPolluData = document.querySelector(".green");
   try {
     close.disabled = true;
     getPolluData.disabled = true;
@@ -86,7 +87,7 @@ function App() {
   if (tempCoordinates.lat !== '-') {
     coord = [tempCoordinates.lat, tempCoordinates.lon];
   }
-
+  console.log({ tempCoordinates });
   useEffect(() => {
     if (location.pathname === "/") {
       activate("svg1");
@@ -112,6 +113,29 @@ function App() {
     }
 
   }, []);
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.getElementById("body").className = 'body-dark';
+    } else {
+      document.getElementById("body").className = 'body-light';
+
+    }
+  }, [theme]);
+  const generateMarkerColor = (coordinates) => {
+    let hexValue = "#F4C430"
+    if (coordinates?.lat !== "-" && coordinates?.lon !== "-") {
+      hexValue = (Number((String(coordinates.lat)).replace("-", "")) + Number((String(coordinates.lon)).replace("-", ""))).toString(16).replace(".", "").substring(0, 6);
+      if (hexValue.length < 6) {
+        let diff = 6 - hexValue.length;
+        hexValue = `#${hexValue}${("0").repeat(diff)}`;
+      } else {
+        hexValue = `#${hexValue}`;
+      }
+    }
+    return hexValue;
+  }
+
   return (
     <div className="App" data-theme={theme}>
       <LoadingBar
@@ -120,73 +144,71 @@ function App() {
         onLoaderFinished={() => setProgress(0)} />
       <div className="bg"></div>
       <Popup />
-      <div>
-        <nav className="navbar">
-          <ul className="navbar-nav">
-            <li className="logo">
-              <a href="#" className="nav-link">
-                <span className="link-text logo-text">HG Originals</span>
-                {icons.hgo}
-              </a>
-            </li>
-            <li className="nav-item" onClick={() => { activate("svg1"); setNavName("🏠 Home"); }}>
-              <Link className="nav-link" to="/">
-                {icons.home}
-                <span className="link-text">Home</span>
-              </Link>
-            </li>
+      <nav className="navbar">
+        <ul className="navbar-nav">
+          <li className="logo">
+            <a href="#" className="nav-link">
+              <span className="link-text logo-text">HG Originals</span>
+              {icons.hgo}
+            </a>
+          </li>
+          <li className="nav-item" onClick={() => { activate("svg1"); setNavName("🏠 Home"); }}>
+            <Link className="nav-link" to="/">
+              {icons.home}
+              <span className="link-text">Home</span>
+            </Link>
+          </li>
 
-            <li className="nav-item" onClick={() => { activate("svg2"); setNavName("🏭 Pollution"); }}>
-              <Link className="nav-link" to="/pollution">
-                {icons.pollution}
-                <span className="link-text">Pollution</span>
-              </Link>
-            </li>
+          <li className="nav-item" onClick={() => { activate("svg2"); setNavName("🏭 Pollution"); }}>
+            <Link className="nav-link" to="/pollution">
+              {icons.pollution}
+              <span className="link-text">Pollution</span>
+            </Link>
+          </li>
 
-            <li className="nav-item" onClick={() => { activate("svg3"); setNavName("⏳ Hourly Weather Data"); }}>
-              <Link className="nav-link" to="/hourlyWeatherData">
-                {icons.hourlyWeather}
-                <span style={{ marginLeft: "0.7rem" }} className="link-text">Hourly Weather Data</span>
-              </Link>
-            </li>
+          <li className="nav-item" onClick={() => { activate("svg3"); setNavName("⏳ Hourly Weather Data"); }}>
+            <Link className="nav-link" to="/hourlyWeatherData">
+              {icons.hourlyWeather}
+              <span style={{ marginLeft: "0.7rem" }} className="link-text">Hourly Weather Data</span>
+            </Link>
+          </li>
 
-            <li className="nav-item" onClick={() => { activate("svg4"); setNavName("📆 Daily Weather Data"); }}>
-              <Link className="nav-link" to="/dailyWeatherData">
-                {icons.dailyWeather}
-                <span style={{ marginLeft: "0.7rem" }} className="link-text">Daily Weather Data</span>
-              </Link>
-            </li>
+          <li className="nav-item" onClick={() => { activate("svg4"); setNavName("📆 Daily Weather Data"); }}>
+            <Link className="nav-link" to="/dailyWeatherData">
+              {icons.dailyWeather}
+              <span style={{ marginLeft: "0.7rem" }} className="link-text">Daily Weather Data</span>
+            </Link>
+          </li>
 
-            <li className="nav-item" onClick={() => { activate("svg5"); setNavName("📻 News"); }}>
-              <Link className="nav-link" to="/news">
-                {icons.news}
-                <span className="link-text">News</span>
-              </Link>
-            </li>
+          <li className="nav-item" onClick={() => { activate("svg5"); setNavName("📻 News"); }}>
+            <Link className="nav-link" to="/news">
+              {icons.news}
+              <span className="link-text">News</span>
+            </Link>
+          </li>
 
-            <li className="nav-item" onClick={() => { activate("svg6"); setNavName("☎️ Contact"); }}>
-              <Link className="nav-link" to="/contact">
-                {icons.contact}
-                <span className="link-text">Contact</span>
-              </Link>
-            </li>
+          <li className="nav-item" onClick={() => { activate("svg6"); setNavName("☎️ Contact"); }}>
+            <Link className="nav-link" to="/contact">
+              {icons.contact}
+              <span className="link-text">Contact</span>
+            </Link>
+          </li>
 
-            <li className="nav-item" onClick={() => { activate("svg7"); setNavName("📝 About"); }}>
-              <Link className="nav-link" to="/about">
-                {icons.aboutUs}
-                <span className="link-text">About</span>
-              </Link>
-            </li>
+          <li className="nav-item" onClick={() => { activate("svg7"); setNavName("📝 About"); }}>
+            <Link className="nav-link" to="/about">
+              {icons.aboutUs}
+              <span className="link-text">About</span>
+            </Link>
+          </li>
 
-            <li className="nav-item" onClick={() => { const newTheme = theme === 'light' ? 'dark' : 'light'; setTheme(newTheme); }}>
-              <div className="nav-link">
-                {icons.darkMode}
-                <span className="link-text">Theme</span>
-              </div>
-            </li>
-          </ul>
-        </nav>
-      </div>
+          <li className="nav-item" onClick={() => { const newTheme = theme === 'light' ? 'dark' : 'light'; setTheme(newTheme); }}>
+            <div className="nav-link">
+              {icons.darkMode}
+              <span className="link-text">Theme</span>
+            </div>
+          </li>
+        </ul>
+      </nav>
       <div className="AppDiv">
         <h1 className="App-h1" style={{ borderRadius: "2rem", padding: "1.2rem" }}><span style={{ display: 'block' }}>{icons.hgo}</span>HGO Weather App</h1>
         <h2 id="abc" className="App-h1" style={{ padding: "0.8rem" }}>{navName}</h2>
@@ -202,14 +224,14 @@ function App() {
         </Routes>
       </div>
       <div id="mapCont" style={{ display: "none", position: "absolute", height: "100%", width: "100%", top: "0%", zIndex: "2" }}>
-        <div style={{ height: "100%", position: "fixed", width: "100%", backgroundColor: "#020535", opacity: "0.85" }}>.</div>
-        <div style={{ marginTop: "50vh", width: "90%", transform: "translate(-50%,-50%)", marginLeft: "50%" }}>
-          <Map height={600} defaultCenter={coord} center={coord} defaultZoom={3.8} onClick={({ event, latLng, pixel }) => { setTempCoordinates({ lat: latLng[0], lon: latLng[1] }) }}>
+        <div style={{ height: "100%", position: "fixed", width: "100%", backgroundColor: generateMarkerColor(tempCoordinates), opacity: "0.85", transition: "background-color 600ms ease" }}>.</div>
+        <div id="mapDiv" style={{ marginTop: "50vh", width: "90%", transform: "translate(-50%,-50%)", marginLeft: "50%" }}>
+          <Map boxClassname="mapBox" zoomSnap={false} height={600} defaultCenter={coord} center={coord} defaultZoom={3.8} onClick={({ event, latLng, pixel }) => { setTempCoordinates({ lat: latLng[0], lon: latLng[1] }) }}>
             <ZoomControl />
-            <Marker id="marker" width={50} anchor={coord} />
+            <Marker id="marker" width={50} anchor={coord} color={generateMarkerColor(tempCoordinates)} />
           </Map>
-          <button className="cartoonButtons CB-close" onClick={() => { hideMap(); }}>Close</button>
-          <button className="cartoonButtons CB-getPolluData"
+          <button className="action-button shadow animate red" onClick={() => { hideMap(); }}>Close</button>
+          <button className="action-button shadow animate green"
             onClick={async () => {
               await getAddressData(coord, dispatch, setProgress);
             }}>Get Details</button>
