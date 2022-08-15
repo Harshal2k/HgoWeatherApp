@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/HgoWeatherApp/static/css/main.760e1024.css",
-    "main.js": "/HgoWeatherApp/static/js/main.1e233fd3.js",
+    "main.css": "/HgoWeatherApp/static/css/main.9d80bc31.css",
+    "main.js": "/HgoWeatherApp/static/js/main.28317cad.js",
     "static/js/787.75a9a1f9.chunk.js": "/HgoWeatherApp/static/js/787.75a9a1f9.chunk.js",
     "index.html": "/HgoWeatherApp/index.html",
-    "main.760e1024.css.map": "/HgoWeatherApp/static/css/main.760e1024.css.map",
-    "main.1e233fd3.js.map": "/HgoWeatherApp/static/js/main.1e233fd3.js.map",
+    "main.9d80bc31.css.map": "/HgoWeatherApp/static/css/main.9d80bc31.css.map",
+    "main.28317cad.js.map": "/HgoWeatherApp/static/js/main.28317cad.js.map",
     "787.75a9a1f9.chunk.js.map": "/HgoWeatherApp/static/js/787.75a9a1f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.760e1024.css",
-    "static/js/main.1e233fd3.js"
+    "static/css/main.9d80bc31.css",
+    "static/js/main.28317cad.js"
   ]
 }
