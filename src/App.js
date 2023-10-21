@@ -239,8 +239,8 @@ function App() {
       </div>
       <footer>
         {icons.hgo}
-        <p style={{ color: "var(--nav-text)", fontSize: "1rem" }} className="info-p">HARSHAL GOSAWI</p>
-        <p style={{ letterSpacing: "0.6rem" }} className="info-p">ORIGINALS</p>
+        {/* <p style={{ color: "var(--nav-text)", fontSize: "1rem" }} className="info-p">HARSHAL GOSAWI</p>
+        <p style={{ letterSpacing: "0.6rem" }} className="info-p">ORIGINALS</p> */}
       </footer>
     </div>
 
