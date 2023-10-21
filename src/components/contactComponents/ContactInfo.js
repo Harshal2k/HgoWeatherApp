@@ -263,7 +263,7 @@ const ContactInfo = () => {
                 </div>
             </div>
 
-            <div style={{ width: "72.5rem", maxWidth: "96%" }} className="OD-div">
+            {/* <div style={{ width: "72.5rem", maxWidth: "96%" }} className="OD-div">
                 <h2 className="info-h1 contactTitle">SOCIAL 🌐</h2>
                 <div className="other-details-cont" style={{ justifyContent: 'space-evenly' }}>
                     <a target="_blank" href="https://www.linkedin.com/in/harshal-gosawi-1382b6238" className="socialIcons" id="linkedin">{icons.linkedin}</a>
@@ -272,7 +272,7 @@ const ContactInfo = () => {
                     <a target="_blank" href="https://twitter.com/harshal2k?t=bORAy91hBS26XRTeiAOGGw&s=09" className="socialIcons" id="twitter">{icons.twitter}</a>
                     <a target="_blank" href="https://www.facebook.com/harshal.gosawi.16  " className="socialIcons" id="facebook">{icons.facebook}</a>
                 </div>
-            </div>
+            </div> */}
 
             <div style={{ width: "72.5rem", maxWidth: "96%" }} className="OD-div">
                 <div id="sending" style={{ width: "40%", display: 'none' }} />
