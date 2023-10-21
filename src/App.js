@@ -21,7 +21,7 @@ import Popup from "./components/Popup";
 function hideMap() {
   document.querySelector("#mapCont").style.display = "none";
   document.querySelector(".AppDiv").style.display = "flex";
-  document.querySelector(".App").style.overflow="auto";
+  document.querySelector(".App").style.overflow = "auto";
 }
 
 function activate(svgId) {
@@ -239,8 +239,8 @@ function App() {
       </div>
       <footer>
         {icons.hgo}
-        {/* <p style={{ color: "var(--nav-text)", fontSize: "1rem" }} className="info-p">HARSHAL GOSAWI</p>
-        <p style={{ letterSpacing: "0.6rem" }} className="info-p">ORIGINALS</p> */}
+        <p style={{ color: "var(--nav-text)", fontSize: "1rem" }} className="info-p">HARSHAL GOSAWI</p>
+        <p style={{ letterSpacing: "0.6rem" }} className="info-p">ORIGINALS</p>
       </footer>
     </div>
 
