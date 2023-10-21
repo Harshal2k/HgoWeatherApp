@@ -187,12 +187,12 @@ function App() {
             </Link>
           </li>
 
-          <li className="nav-item" onClick={() => { activate("svg6"); setNavName("☎️ Contact"); }}>
+          {/* <li className="nav-item" onClick={() => { activate("svg6"); setNavName("☎️ Contact"); }}>
             <Link className="nav-link" to="/contact">
               {icons.contact}
               <span className="link-text">Contact</span>
             </Link>
-          </li>
+          </li> */}
 
           <li className="nav-item" onClick={() => { activate("svg7"); setNavName("📝 About"); }}>
             <Link className="nav-link" to="/about">
@@ -219,7 +219,7 @@ function App() {
           <Route path="/hourlyWeatherData" element={<HourlyWeatherData />}></Route>
           <Route path="/dailyWeatherData" element={<DailyWeatherData />}></Route>
           <Route path="/news" element={<News />}></Route>
-          <Route path="/contact" element={<ContactInfo />}></Route>
+          {/* <Route path="/contact" element={<ContactInfo />}></Route> */}
           <Route path="/about" element={<About />}></Route>
         </Routes>
       </div>
@@ -239,8 +239,8 @@ function App() {
       </div>
       <footer>
         {icons.hgo}
-        <p style={{ color: "var(--nav-text)", fontSize: "1rem" }} className="info-p">HARSHAL GOSAWI</p>
-        <p style={{ letterSpacing: "0.6rem" }} className="info-p">ORIGINALS</p>
+        {/* <p style={{ color: "var(--nav-text)", fontSize: "1rem" }} className="info-p">HARSHAL GOSAWI</p>
+        <p style={{ letterSpacing: "0.6rem" }} className="info-p">ORIGINALS</p> */}
       </footer>
     </div>
 
